@@ -16,6 +16,7 @@ import HeroSection2 from '../component/HeroSection2';
 import Form from '../component/Form';
 import FloatingButtons from '../component/FloatingButtons';
 import ScrollToTop from '../component/ScrollToTop';
+import Footer from '../component/Footer';
 
 const LadakhAndSpiti = memo(() => {
   return (
@@ -34,6 +35,7 @@ const LadakhAndSpiti = memo(() => {
         <TestimonialSection />
         <Adventure />
         <ImageSlider />
+        <Footer />
       </Suspense>
     </div>
   );

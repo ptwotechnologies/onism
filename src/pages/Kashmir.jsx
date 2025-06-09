@@ -16,6 +16,7 @@ import HeroSection3 from '../component/HeroSection3';
 import Form from '../component/Form';
 import FloatingButtons from '../component/FloatingButtons';
 import ScrollToTop from '../component/ScrollToTop';
+import Footer from '../component/Footer';
 
 const Kashmir = memo(() => {
   return (
@@ -34,6 +35,7 @@ const Kashmir = memo(() => {
         <TestimonialSection />
         <Adventure />
         <ImageSlider />
+        <Footer />
       </Suspense>
     </div>
   );

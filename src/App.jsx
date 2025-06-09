@@ -8,8 +8,7 @@ function App() {
   return (
     <>
       <Header />
-      <Router /> {/* Remove Suspense wrapper from here */}
-      <Footer />
+      <Router />
     </>
   );
 }
