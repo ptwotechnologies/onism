@@ -1,38 +1,37 @@
-import { FaQuoteLeft, FaStar } from "react-icons/fa";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay, Pagination } from "swiper/modules";
-import "swiper/css";
-import "swiper/css/pagination";
+import { FaQuoteLeft, FaStar } from 'react-icons/fa';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Autoplay, Pagination } from 'swiper/modules';
+import 'swiper/css';
+import 'swiper/css/pagination';
 
-import bgImage from "../../assets/Testimonial/bg-map.png";
-import Review1 from "../../assets/Testimonial/Review1.png";
-import Review2 from "../../assets/Testimonial/Review2.png";
-import Review3 from "../../assets/Testimonial/Review3.png";
+import bgImage from '../../assets/Testimonial/bg-map.png';
+import Review1 from '../../assets/Testimonial/Review1.png';
+import Review2 from '../../assets/Testimonial/Review2.png';
+import Review3 from '../../assets/Testimonial/Review3.png';
 
 const testimonials = [
   {
-    title: "Very Amazing Trip",
-    text: "Our tour to LEH-LADAKH was a very amazing trip. The hotels were very good and clean at all places. We had a wonderful stay at Apricot Villa at Turtuk, which is located in the middle of Turtuk Village. There was very good response from Onism Tour throughout our tour. Everything from airport pickup to drop was well taken care of. All the places in the itinerary were covered with good drivers and vehicles. Thank you, Onism Tour.",
-    name: "Naga Sekhar",
+    title: 'Very Amazing Trip',
+    text: 'Our tour to LEH-LADAKH was a very amazing trip. The hotels were very good and clean at all places. We had a wonderful stay at Apricot Villa at Turtuk, which is located in the middle of Turtuk Village.',
+    name: 'Naga Sekhar',
     image: Review1,
   },
   {
-    title: "Nice Experience",
-    text: "It was a nice experience with Onism Tour. We booked a customized package for Ladakh, provided our preferred locations, and the team arranged very good hotels at affordable prices. Along with that, we got quality accommodations, a good car, and a very professional driver. We’d definitely reach out to Onism Tour again in the future.",
-    name: "Suman Chatterjee",
+    title: 'Nice Experience',
+    text: 'It was a nice experience with Onism Tour. We booked a customized package for Ladakh, provided our preferred locations, and the team arranged very good hotels at affordable prices.',
+    name: 'Suman Chatterjee',
     image: Review2,
   },
   {
-    title: "Extremely Satisfied",
-    text: "I recently booked a Spiti package through Onism Tour and I am extremely satisfied with the experience. The itinerary was well-planned and everything was delivered as promised. Our driver and guide (Sabu) was very kind and flexible throughout the journey. I had a smooth and memorable trip. Highly recommended!",
-    name: "Sandeep",
+    title: 'Extremely Satisfied',
+    text: 'I recently booked a Spiti package through Onism Tour and I am extremely satisfied with the experience. The itinerary was well-planned and everything was delivered as promised.',
+    name: 'Sandeep',
     image: Review3,
   },
 ];
 
-
 const TestimonialCard = ({ testimonial }) => (
-  <div className="bg-white text-black leading-6  rounded-2xl p-8 shadow-xl hover:shadow-2xl transition-all duration-300 h-full flex flex-col justify-between">
+  <div className="bg-white text-black rounded-2xl p-8 shadow-xl hover:shadow-2xl transition-all duration-300 h-full flex flex-col">
     <FaQuoteLeft className="text-green-600 text-3xl mb-4" />
     <h3 className="font-semibold text-xl mb-3">{testimonial.title}</h3>
     <div className="flex justify-center mb-4 text-orange-400">
@@ -40,17 +39,20 @@ const TestimonialCard = ({ testimonial }) => (
         <FaStar key={i} className="text-md" />
       ))}
     </div>
-    <p className=" text-gray-700 flex-grow text-left leading-8  text-lg">{testimonial.text}</p>
-    <div className="flex items-center justify-center gap-3 mt-6">
+    <p className="text-gray-700 text-left leading-8 text-lg mb-6 flex-grow">
+      {testimonial.text}
+    </p>
+    <div className="flex items-center mt-auto pt-4 border-t border-gray-200">
       <img
         src={testimonial.image}
         alt={testimonial.name}
-        className="w-18 h-18 rounded-full object-cover"
+        className="w-14 h-14 rounded-full object-cover"
       />
-      <span className="font-bold text-lg">{testimonial.name}</span>
+      <span className="font-bold text-lg ml-4">{testimonial.name}</span>
     </div>
   </div>
 );
+
 const TestimonialSection = () => {
   return (
     <section
@@ -76,7 +78,6 @@ const TestimonialSection = () => {
           Our Client Feedback
         </p>
 
-
         <Swiper
           modules={[Autoplay]}
           autoplay={{ delay: 3000, disableOnInteraction: false }}
@@ -87,10 +88,10 @@ const TestimonialSection = () => {
             768: { slidesPerView: 2 },
             1024: { slidesPerView: 3 },
           }}
-          className="!px-4"
+          className="!px-4 !pb-2"
         >
           {testimonials.map((testimonial, index) => (
-            <SwiperSlide key={index} className="h-full flex">
+            <SwiperSlide key={index} className="h-auto">
               <TestimonialCard testimonial={testimonial} />
             </SwiperSlide>
           ))}

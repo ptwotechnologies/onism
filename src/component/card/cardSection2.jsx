@@ -1,45 +1,95 @@
-import React from "react";
-import { FaClock, FaMapMarkerAlt, FaWhatsapp, FaCheckDouble, FaTelegramPlane } from "react-icons/fa";
-import { BsSuitcase2 } from "react-icons/bs";
-import { MdOutlineWifiCalling3 } from "react-icons/md";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay } from "swiper/modules";
-import "swiper/css";
+import React from 'react';
+import {
+  FaClock,
+  FaMapMarkerAlt,
+  FaWhatsapp,
+  FaCheckDouble,
+  FaTelegramPlane,
+} from 'react-icons/fa';
+import { BsSuitcase2 } from 'react-icons/bs';
+import { MdOutlineWifiCalling3 } from 'react-icons/md';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Autoplay } from 'swiper/modules';
+import 'swiper/css';
 
-import tour1 from "../../assets/cardSection2/card1.png";
-import tour2 from "../../assets/cardSection2/card2.png";
-import tour3 from "../../assets/cardSection2/card3.png";
+import tour1 from '../../assets/cardSection2/card1.png';
+import tour2 from '../../assets/cardSection2/card2.png';
+import tour3 from '../../assets/cardSection2/card3.png';
 
 const packages = [
   {
     id: 1,
     image: tour1,
-    discount: "7% OFF",
-    title: "Tour of Himachal Pradesh with Amritsar",
-    nights: "9 Nights 10 Days",
-    price: "₹12,999/- Per Person (Offer Price)",
-    places: ["Delhi", "Shimla", "Kullu", "Manali", "Atal Tunnel", "Dharamshala", "Mcleodganj", "Dalhousie", "Amritsar", "Khajjiar"],
-    inclusions: ["09 Breakfast & 09 Dinner", "All Transfers & Sightseeing by cab", "09 Nights Accommodation", "GST, Toll, Parking and Driver Allowances"],
+    discount: '7% OFF',
+    title: 'Tour of Himachal Pradesh with Amritsar',
+    nights: '9 Nights 10 Days',
+    price: '₹12,999/- Per Person (Offer Price)',
+    places: [
+      'Delhi',
+      'Shimla',
+      'Kullu',
+      'Manali',
+      'Atal Tunnel',
+      'Dharamshala',
+      'Mcleodganj',
+      'Dalhousie',
+      'Amritsar',
+      'Khajjiar',
+    ],
+    inclusions: [
+      '09 Breakfast & 09 Dinner',
+      'All Transfers & Sightseeing by cab',
+      '09 Nights Accommodation',
+      'GST, Toll, Parking and Driver Allowances',
+    ],
   },
   {
     id: 2,
     image: tour2,
-    discount: "9% OFF",
-    title: "Incredible Himachal",
-    nights: "8 Nights 9 Days",
-    price: "₹11,999/- Per Person (Offer Price)",
-    places: ["Shimla", "Manali", "Kufri", "Solang Valley", "Atal Tunnel", "Dharamshala", "Mcleodganj", "Dalhousie", "Khajjiar"],
-    inclusions: ["08 Breakfast & 08 Dinner", "All Transfers & Sightseeing by cab", "08 Nights Accommodation", "GST, Toll, Parking and Driver Allowances"],
+    discount: '9% OFF',
+    title: 'Incredible Himachal',
+    nights: '8 Nights 9 Days',
+    price: '₹11,999/- Per Person (Offer Price)',
+    places: [
+      'Shimla',
+      'Manali',
+      'Kufri',
+      'Solang Valley',
+      'Atal Tunnel',
+      'Dharamshala',
+      'Mcleodganj',
+      'Dalhousie',
+      'Khajjiar',
+    ],
+    inclusions: [
+      '08 Breakfast & 08 Dinner',
+      'All Transfers & Sightseeing by cab',
+      '08 Nights Accommodation',
+      'GST, Toll, Parking and Driver Allowances',
+    ],
   },
   {
     id: 3,
     image: tour3,
-    discount: "7% OFF",
-    title: "Himalayan Journey with Taj",
-    nights: "6 Nights 7 Days",
-    price: "₹9,999/- Per Person (Offer Price)",
-    places: ["Delhi", "Shimla", "Kufri", "Kullu", "Manali", "Atal Tunnel", "Taj Mahal"],
-    inclusions: ["05 Breakfast & 05 Dinner", "All Transfers & Sightseeing by cab", "05 Nights Accommodation", "GST, Toll, Parking and Driver Allowances"],
+    discount: '7% OFF',
+    title: 'Himalayan Journey with Taj',
+    nights: '6 Nights 7 Days',
+    price: '₹9,999/- Per Person (Offer Price)',
+    places: [
+      'Delhi',
+      'Shimla',
+      'Kufri',
+      'Kullu',
+      'Manali',
+      'Atal Tunnel',
+      'Taj Mahal',
+    ],
+    inclusions: [
+      '05 Breakfast & 05 Dinner',
+      'All Transfers & Sightseeing by cab',
+      '05 Nights Accommodation',
+      'GST, Toll, Parking and Driver Allowances',
+    ],
   },
 ];
 
@@ -47,7 +97,12 @@ const PackageCard = ({ pkg }) => {
   return (
     <div className="bg-[#f8f8f8] shadow-md rounded-xl overflow-hidden transition-transform hover:scale-105 hover:shadow-lg max-w-sm mx-auto">
       <div className="relative">
-        <img src={pkg.image} alt={pkg.title} className="w-full h-56 object-cover" loading="lazy" />
+        <img
+          src={pkg.image}
+          alt={pkg.title}
+          className="w-full h-56 object-cover"
+          loading="lazy"
+        />
         <span className="absolute top-3 left-3 bg-green-600 text-white text-xs font-semibold px-3 py-1 rounded-full shadow-md">
           {pkg.discount}
         </span>
@@ -67,7 +122,10 @@ const PackageCard = ({ pkg }) => {
           </p>
           <div className="flex flex-wrap gap-1 mt-2 ">
             {pkg.places.map((place, idx) => (
-              <span key={idx} className="text-xs px-2 py-1 bg-gray-500 rounded-full text-white">
+              <span
+                key={idx}
+                className="text-xs px-2 py-1 bg-gray-500 rounded-full text-white"
+              >
                 {place}
               </span>
             ))}
@@ -80,7 +138,10 @@ const PackageCard = ({ pkg }) => {
           </p>
           <ul className="text-gray-500 text-[16px] mt-1 divide-y divide-gray-300">
             {pkg.inclusions.map((item, idx) => (
-              <li key={idx} className="flex items-center gap-3 py-3 tracking-wide leading-relaxed">
+              <li
+                key={idx}
+                className="flex items-center gap-3 py-3 tracking-wide leading-relaxed"
+              >
                 <FaCheckDouble className="text-gray-500" /> {item}
               </li>
             ))}
@@ -89,7 +150,11 @@ const PackageCard = ({ pkg }) => {
 
         <div className="flex justify-between items-center mt-6">
           <div className="flex gap-3">
-            <a href="https://wa.link/5bi0km" target="_blank" rel="noopener noreferrer">
+            <a
+              href="https://wa.link/5bi0km"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               <div className="p-2 rounded-full bg-white border border-green-600 text-green-600 hover:bg-green-600 hover:text-white transition duration-300">
                 <FaWhatsapp size={20} />
               </div>
@@ -102,13 +167,11 @@ const PackageCard = ({ pkg }) => {
             </a>
           </div>
 
-          <div className="flex items-center gap-2 bg-white border border-green-600 text-green-600 px-4 py-2 rounded-full hover:bg-green-600 hover:text-white transition duration-300 cursor-pointer"
-          >
+          <div className="flex items-center gap-2 bg-white border border-green-600 text-green-600 px-4 py-2 rounded-full hover:bg-green-600 hover:text-white transition duration-300 cursor-pointer">
             <FaTelegramPlane />
             <a href="/">
               <span className="font-semibold">Get a Quote</span>
             </a>
-
           </div>
         </div>
       </div>

@@ -1,80 +1,119 @@
-
-import React from "react";
-import { FaClock, FaMapMarkerAlt, FaWhatsapp, FaCheckDouble, FaTelegramPlane } from "react-icons/fa";
-import { BsSuitcase2 } from "react-icons/bs";
-import { MdOutlineWifiCalling3 } from "react-icons/md";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay } from "swiper/modules";
-import "swiper/css";
-import card1 from "../../assets/cardSection5/card1.png";
-import card2 from "../../assets/cardSection5/card2.png";
-import card3 from "../../assets/cardSection5/card3.png";
-
+import React from 'react';
+import {
+  FaClock,
+  FaMapMarkerAlt,
+  FaWhatsapp,
+  FaCheckDouble,
+  FaTelegramPlane,
+} from 'react-icons/fa';
+import { BsSuitcase2 } from 'react-icons/bs';
+import { MdOutlineWifiCalling3 } from 'react-icons/md';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Autoplay } from 'swiper/modules';
+import 'swiper/css';
+import card1 from '../../assets/cardSection5/card1.png';
+import card2 from '../../assets/cardSection5/card2.png';
+import card3 from '../../assets/cardSection5/card3.png';
 
 const packages = [
   {
     image: card1,
-    discount: "9% OFF",
-    title: "Spiti Full Circuit — Shimla To Manali To Road Trip From Delhi",
-    nights: "7 Nights 8 Days",
-    price: "₹18,999/- Per Person (Offer Price)",
+    discount: '9% OFF',
+    title: 'Spiti Full Circuit — Shimla To Manali To Road Trip From Delhi',
+    nights: '7 Nights 8 Days',
+    price: '₹18,999/- Per Person (Offer Price)',
     places: [
-      "Shimla", "Narkanda", "Kalpa", "Chitkul", "Sangla", "Nako",
-      "Tabo", "Kaza", "Hikkim", "Komic", "Langza", "Dhankar",
-      "Chicham Bridge", "Chandratal", "Kunzum La", "Manali"
+      'Shimla',
+      'Narkanda',
+      'Kalpa',
+      'Chitkul',
+      'Sangla',
+      'Nako',
+      'Tabo',
+      'Kaza',
+      'Hikkim',
+      'Komic',
+      'Langza',
+      'Dhankar',
+      'Chicham Bridge',
+      'Chandratal',
+      'Kunzum La',
+      'Manali',
     ],
     inclusions: [
-      "07 Breakfast & 07 Dinner",
-      "All sightseeing by cab",
-      "07 Nights Accommodation",
-      "GST, Toll, Parking and Driver Allowances",
-      "Permits"
+      '07 Breakfast & 07 Dinner',
+      'All sightseeing by cab',
+      '07 Nights Accommodation',
+      'GST, Toll, Parking and Driver Allowances',
+      'Permits',
     ],
   },
   {
     image: card2,
-    discount: "5% OFF",
-    title: "Spiti Valley With Chandratal",
-    nights: "4 Nights 5 Days",
-    price: "₹14,999/- Per Person (Offer Price)",
+    discount: '5% OFF',
+    title: 'Spiti Valley With Chandratal',
+    nights: '4 Nights 5 Days',
+    price: '₹14,999/- Per Person (Offer Price)',
     places: [
-      "Kaza", "Hikkim", "Komic", "Langza", "Dhankar",
-      "Chicham Bridge", "Chandratal", "Kunzum La", "Manali"
+      'Kaza',
+      'Hikkim',
+      'Komic',
+      'Langza',
+      'Dhankar',
+      'Chicham Bridge',
+      'Chandratal',
+      'Kunzum La',
+      'Manali',
     ],
     inclusions: [
-      "04 Breakfast & 04 Dinner",
-      "All sightseeing by cab",
-      "04 Nights Accommodation",
-      "GST, Toll, Parking and Driver Allowances",
-      "Permits"
+      '04 Breakfast & 04 Dinner',
+      'All sightseeing by cab',
+      '04 Nights Accommodation',
+      'GST, Toll, Parking and Driver Allowances',
+      'Permits',
     ],
   },
   {
     image: card3,
-    discount: "7% OFF",
-    title: "Winter Spiti Valley",
-    nights: "6 Nights 7 Days",
-    price: "₹16,999/- Per Person (Offer Price)",
+    discount: '7% OFF',
+    title: 'Winter Spiti Valley',
+    nights: '6 Nights 7 Days',
+    price: '₹16,999/- Per Person (Offer Price)',
     places: [
-      "Shimla", "Narkanda", "Kalpa", "Chitkul", "Sangla", "Nako",
-      "Tabo", "Kaza", "Hikkim", "Komic", "Langza", "Dhankar", "Chicham Bridge"
+      'Shimla',
+      'Narkanda',
+      'Kalpa',
+      'Chitkul',
+      'Sangla',
+      'Nako',
+      'Tabo',
+      'Kaza',
+      'Hikkim',
+      'Komic',
+      'Langza',
+      'Dhankar',
+      'Chicham Bridge',
     ],
     inclusions: [
-      "06 Breakfast & 06 Dinner",
-      "All sightseeing by cab",
-      "06 Nights Accommodation.",
-      "GST, Toll, Parking and Driver Allowances",
-      "Permits"
+      '06 Breakfast & 06 Dinner',
+      'All sightseeing by cab',
+      '06 Nights Accommodation.',
+      'GST, Toll, Parking and Driver Allowances',
+      'Permits',
     ],
   },
 ];
-
 
 const PackageCard = ({ pkg }) => {
   return (
     <div className="bg-[#f8f8f8] shadow-md rounded-xl overflow-hidden transition-transform hover:scale-105 hover:shadow-lg max-w-sm mx-auto">
       <div className="relative">
-        <img src={pkg.image} alt={pkg.title} className="w-full h-56 object-cover" loading="lazy" />
+        <img
+          src={pkg.image}
+          alt={pkg.title}
+          className="w-full h-56 object-cover"
+          loading="lazy"
+        />
         <span className="absolute top-3 left-3 bg-green-600 text-white text-xs font-semibold px-3 py-1 rounded-full shadow-md">
           {pkg.discount}
         </span>
@@ -94,7 +133,10 @@ const PackageCard = ({ pkg }) => {
           </p>
           <div className="flex flex-wrap gap-1 mt-2">
             {pkg.places.map((place, idx) => (
-              <span key={idx} className="text-xs px-2 py-1 bg-gray-500 rounded-full text-white">
+              <span
+                key={idx}
+                className="text-xs px-2 py-1 bg-gray-500 rounded-full text-white"
+              >
                 {place}
               </span>
             ))}
@@ -107,7 +149,10 @@ const PackageCard = ({ pkg }) => {
           </p>
           <ul className="text-gray-500 text-[16px] mt-1 divide-y divide-gray-300">
             {pkg.inclusions.map((item, idx) => (
-              <li key={idx} className="flex items-center gap-3 py-3 tracking-wide leading-relaxed">
+              <li
+                key={idx}
+                className="flex items-center gap-3 py-3 tracking-wide leading-relaxed"
+              >
                 <FaCheckDouble className="text-gray-500" /> {item}
               </li>
             ))}
@@ -116,16 +161,28 @@ const PackageCard = ({ pkg }) => {
 
         <div className="flex justify-between items-center mt-6">
           <div className="flex gap-3">
-            <a href="https://wa.link/5bi0km"
-             onClick={() => window.gtag_report_conversion('AW-11046863854/hV0qCNud6YoaEO6Hx5Mp')}
-            target="_blank" rel="noopener noreferrer">
+            <a
+              href="https://wa.link/5bi0km"
+              onClick={() =>
+                window.gtag_report_conversion(
+                  'AW-11046863854/hV0qCNud6YoaEO6Hx5Mp'
+                )
+              }
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               <div className="p-2 rounded-full bg-white border border-green-600 text-green-600 hover:bg-green-600 hover:text-white transition duration-300">
                 <FaWhatsapp size={20} />
               </div>
             </a>
 
-            <a href="tel:+919459618859"
-             onClick={() => window.gtag_report_conversion('AW-11046863854/hV0qCNud6YoaEO6Hx5Mp')}
+            <a
+              href="tel:+919459618859"
+              onClick={() =>
+                window.gtag_report_conversion(
+                  'AW-11046863854/hV0qCNud6YoaEO6Hx5Mp'
+                )
+              }
             >
               <div className="p-2 rounded-full bg-white border border-green-600 text-green-600 hover:bg-green-600 hover:text-white transition duration-300">
                 <MdOutlineWifiCalling3 size={20} />
@@ -133,15 +190,18 @@ const PackageCard = ({ pkg }) => {
             </a>
           </div>
 
-          <div className="flex items-center gap-2 bg-white border border-green-600 text-green-600 px-4 py-2 rounded-full hover:bg-green-600 hover:text-white transition duration-300 cursor-pointer"
-          >
+          <div className="flex items-center gap-2 bg-white border border-green-600 text-green-600 px-4 py-2 rounded-full hover:bg-green-600 hover:text-white transition duration-300 cursor-pointer">
             <FaTelegramPlane />
-            <a href="/"
-             onClick={() => window.gtag_report_conversion('AW-11046863854/hV0qCNud6YoaEO6Hx5Mp')}
+            <a
+              href="/"
+              onClick={() =>
+                window.gtag_report_conversion(
+                  'AW-11046863854/hV0qCNud6YoaEO6Hx5Mp'
+                )
+              }
             >
               <span className="font-semibold">Get a Quote</span>
             </a>
-
           </div>
         </div>
       </div>
@@ -186,4 +246,3 @@ const cardSection5 = () => {
 };
 
 export default cardSection5;
-

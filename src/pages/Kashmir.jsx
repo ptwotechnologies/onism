@@ -1,4 +1,4 @@
-import React, { Suspense, lazy, memo } from 'react';
+import { Suspense, lazy, memo } from 'react';
 import LoadingSpinner from '../component/LoadingSpinner';
 
 // Lazy load below-the-fold components

@@ -1,5 +1,5 @@
 import { FaWhatsapp } from 'react-icons/fa';
-import bgAdventure from '../assets/bg-adventure.png';
+import bgAdventure from '../assets/bg-adventure.avif';
 
 const Adventure = () => {
   return (
@@ -11,7 +11,8 @@ const Adventure = () => {
 
       <div className="relative z-10 flex flex-col items-center justify-center h-full text-center px-4">
         <h1 className="text-white text-4xl md:text-5xl font-extrabold leading-tight mb-6">
-          Ready to Travel with Real Adventure<br />
+          Ready to Travel with Real Adventure
+          <br />
           and Embrace Nature?
         </h1>
 

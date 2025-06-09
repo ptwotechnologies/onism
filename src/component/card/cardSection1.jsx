@@ -1,45 +1,54 @@
-import React from "react";
-import { FaClock, FaMapMarkerAlt } from "react-icons/fa";
-import { BsSuitcase2 } from "react-icons/bs";
-import { FaCheckDouble } from "react-icons/fa6";
-import { FaWhatsapp } from "react-icons/fa6";
-import { MdOutlineWifiCalling3 } from "react-icons/md";
-import { FaTelegramPlane } from "react-icons/fa";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay } from "swiper/modules";
-import Form from '../Form'
-import "swiper/css";
+import React from 'react';
+import { FaClock, FaMapMarkerAlt } from 'react-icons/fa';
+import { BsSuitcase2 } from 'react-icons/bs';
+import { FaCheckDouble } from 'react-icons/fa6';
+import { FaWhatsapp } from 'react-icons/fa6';
+import { MdOutlineWifiCalling3 } from 'react-icons/md';
+import { FaTelegramPlane } from 'react-icons/fa';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Autoplay } from 'swiper/modules';
+import 'swiper/css';
 
-import card1 from "../../assets/cardSection1/card1.png";
-import card2 from "../../assets/cardSection1/card2.png";
-import card3 from "../../assets/cardSection1/card3.png";
+import card1 from '../../assets/cardSection1/card1.png';
+import card2 from '../../assets/cardSection1/card2.png';
+import card3 from '../../assets/cardSection1/card3.png';
 
 const packages = [
   {
     id: 1,
-    title: "Shimla Manali Honeymoon Package from Delhi",
-    nights: "5 Nights 6 Days",
-    price: "₹7,999/- Per Person (Offer Price)",
-    places: ["Delhi", "Shimla", "Kufri", "Kullu", "Manali"],
-    discount: "6% OFF",
+    title: 'Shimla Manali Honeymoon Package from Delhi',
+    nights: '5 Nights 6 Days',
+    price: '₹7,999/- Per Person (Offer Price)',
+    places: ['Delhi', 'Shimla', 'Kufri', 'Kullu', 'Manali'],
+    discount: '6% OFF',
     image: card1,
   },
   {
     id: 2,
-    title: "Manali Honeymoon Package from Delhi",
-    nights: "3 Nights 4 Days",
-    price: "₹5,999/- Per Person (Offer Price)",
-    places: ["Delhi", "Manali", "Solang Valley", "Atal Tunnel", "Kullu"],
-    discount: "8% OFF",
+    title: 'Manali Honeymoon Package from Delhi',
+    nights: '3 Nights 4 Days',
+    price: '₹5,999/- Per Person (Offer Price)',
+    places: ['Delhi', 'Manali', 'Solang Valley', 'Atal Tunnel', 'Kullu'],
+    discount: '8% OFF',
     image: card2,
   },
   {
     id: 3,
-    title: "Jibhi-Tirthan Valley - Kasol - Manali Tour Package",
-    nights: "5 Nights 6 Days",
-    price: "₹7,999/- Per Person (Offer Price)",
-    places: ["Delhi", "Manali", "Solang Valley", "Atal Tunnel", "Kullu", "Kasol", "Manikaran", "Jibhi", "Tirthan"],
-    discount: "7% OFF",
+    title: 'Jibhi-Tirthan Valley - Kasol - Manali Tour Package',
+    nights: '5 Nights 6 Days',
+    price: '₹7,999/- Per Person (Offer Price)',
+    places: [
+      'Delhi',
+      'Manali',
+      'Solang Valley',
+      'Atal Tunnel',
+      'Kullu',
+      'Kasol',
+      'Manikaran',
+      'Jibhi',
+      'Tirthan',
+    ],
+    discount: '7% OFF',
     image: card3,
   },
 ];
@@ -49,7 +58,12 @@ const PackageCard = ({ pkg }) => {
     <div className="bg-[#f8f8f8] shadow-md rounded-xl overflow-hidden transition-transform hover:scale-105 hover:shadow-lg max-w-sm mx-auto">
       {/* Image & Discount Badge */}
       <div className="relative">
-        <img src={pkg.image} alt={pkg.title} className="w-full h-56 object-cover" loading="lazy" />
+        <img
+          src={pkg.image}
+          alt={pkg.title}
+          className="w-full h-56 object-cover"
+          loading="lazy"
+        />
         <span className="absolute top-3 left-3 bg-green-600 text-white text-xs font-semibold px-3 py-1 rounded-full shadow-md">
           {pkg.discount}
         </span>
@@ -68,11 +82,15 @@ const PackageCard = ({ pkg }) => {
         {/* Places to Visit */}
         <div className="mt-2">
           <p className="font-semibold text-gray-800 flex items-center gap-1">
-            <FaMapMarkerAlt className="text-gray-600" size={20} /> Places to visit:
+            <FaMapMarkerAlt className="text-gray-600" size={20} /> Places to
+            visit:
           </p>
           <div className="flex flex-wrap gap-1 mt-2">
             {pkg.places.map((place, index) => (
-              <span key={index} className="text-xs px-2 py-1 bg-gray-500 rounded-full text-white">
+              <span
+                key={index}
+                className="text-xs px-2 py-1 bg-gray-500 rounded-full text-white"
+              >
                 {place}
               </span>
             ))}
@@ -81,7 +99,6 @@ const PackageCard = ({ pkg }) => {
 
         {/* Package Inclusions */}
         <div className="mt-4">
-
           <p className="font-bold text-gray-800 flex items-center gap-2">
             <BsSuitcase2 className="text-gray-900" size={20} />
             Package Inclusions:
@@ -89,10 +106,10 @@ const PackageCard = ({ pkg }) => {
 
           <ul className="text-gray-500 text-[16px] mt-1 divide-y divide-gray-300">
             {[
-              "05 Breakfast & 05 Dinner",
-              "All Transfers & Sightseeing by cab",
-              "05 Nights Accommodation",
-              "GST, Toll, Parking, and Driver Allowances",
+              '05 Breakfast & 05 Dinner',
+              'All Transfers & Sightseeing by cab',
+              '05 Nights Accommodation',
+              'GST, Toll, Parking, and Driver Allowances',
             ].map((item, index) => (
               <li
                 key={index}
@@ -103,12 +120,15 @@ const PackageCard = ({ pkg }) => {
               </li>
             ))}
           </ul>
-
         </div>
         <div className="flex justify-between items-center mt-6">
           {/* Left Icons */}
           <div className="flex gap-3">
-            <a href="https://wa.link/5bi0km" target="_blank" rel="noopener noreferrer">
+            <a
+              href="https://wa.link/5bi0km"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               <div className="p-2 rounded-full bg-white border border-green-600 text-green-600 hover:bg-green-600 hover:text-white transition duration-300">
                 <FaWhatsapp size={20} />
               </div>
@@ -122,16 +142,13 @@ const PackageCard = ({ pkg }) => {
           </div>
 
           {/* Right Quote Button */}
-          <div className="flex items-center gap-2 bg-white border border-green-600 text-green-600 px-4 py-2 rounded-full hover:bg-green-600 hover:text-white transition duration-300 cursor-pointer"
-          >
+          <div className="flex items-center gap-2 bg-white border border-green-600 text-green-600 px-4 py-2 rounded-full hover:bg-green-600 hover:text-white transition duration-300 cursor-pointer">
             <FaTelegramPlane />
             <a href="/">
               <span className="font-semibold">Get a Quote</span>
             </a>
-
           </div>
         </div>
-
       </div>
     </div>
   );
@@ -143,7 +160,6 @@ const TravelPackages = () => {
       <h1 className="text-center text-xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-black mt-6 sm:mt-10 leading-snug sm:leading-tight tracking-tight">
         Best Selling Himachal Tour Packages
       </h1>
-
 
       <div className="container mx-auto max-w-7xl py-14 px-4">
         {/* Swiper for small screens */}
