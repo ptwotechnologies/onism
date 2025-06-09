@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="./src/assets/fevicon.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ONISM Tour</title>
+
+    <!-- Google Analytics + Google Ads -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-P47C40VEYC"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag('js', new Date());
+      gtag('config', 'G-P47C40VEYC');
+
+      function gtag_report_conversion(send_to) {
+        gtag('event', 'conversion', {
+          'send_to': send_to,
+          'value': 1.0,
+          'currency': 'INR',
+        });
+      }
+    </script>
+  </head>
+
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>
