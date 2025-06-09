@@ -9,13 +9,32 @@ const Kashmir = lazy(() => import('../pages/Kashmir'));
 
 const Router = () => {
   return (
-    <Suspense fallback={<LoadingSpinner />}>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/ladakh-and-spiti-trips" element={<LadakhAndSpiti />} />
-        <Route path="/kashmir-trips" element={<Kashmir />} />
-      </Routes>
-    </Suspense>
+    <Routes>
+      <Route
+        path="/"
+        element={
+          <Suspense fallback={<LoadingSpinner />}>
+            <Home />
+          </Suspense>
+        }
+      />
+      <Route
+        path="/ladakh-and-spiti-trips"
+        element={
+          <Suspense fallback={<LoadingSpinner />}>
+            <LadakhAndSpiti />
+          </Suspense>
+        }
+      />
+      <Route
+        path="/kashmir-trips"
+        element={
+          <Suspense fallback={<LoadingSpinner />}>
+            <Kashmir />
+          </Suspense>
+        }
+      />
+    </Routes>
   );
 };
 

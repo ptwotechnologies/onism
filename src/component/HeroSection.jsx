@@ -3,31 +3,55 @@ import heroImage from '../assets/Hero.png';
 import { FaTelegramPlane } from 'react-icons/fa';
 
 const HeroSection = () => {
-  const [loaded, setLoaded] = useState(false);
+  const [imageLoaded, setImageLoaded] = useState(false);
+  const [showContent, setShowContent] = useState(false);
 
   useEffect(() => {
     const img = new Image();
     img.src = heroImage;
-    img.onload = () => setLoaded(true);
+
+    img.onload = () => {
+      setImageLoaded(true);
+      // Delay content visibility slightly for smoother transition
+      setTimeout(() => setShowContent(true), 100);
+    };
+
+    img.onerror = () => {
+      // Fallback: show content even if image fails to load
+      setImageLoaded(true);
+      setShowContent(true);
+    };
   }, []);
 
   return (
     <div
-      className={`relative w-full h-screen flex items-center justify-center transition-opacity duration-700 ease-in-out ${
-         loaded ? 'opacity-100' : 'opacity-0 blur-md scale-105'
+      className={`relative w-full h-screen flex items-center justify-center transition-all duration-500 ease-out ${
+        imageLoaded ? 'opacity-100' : 'opacity-0'
       }`}
       style={{
-        backgroundImage: `url(${heroImage})`,
+        backgroundImage: imageLoaded ? `url(${heroImage})` : 'none',
+        backgroundColor: imageLoaded ? 'transparent' : '#1a1a1a', // Fallback background
         backgroundRepeat: 'no-repeat',
         backgroundSize: 'cover',
         backgroundPosition: 'center center',
       }}
     >
+      {/* Loading placeholder */}
+      {!imageLoaded && (
+        <div className="absolute inset-0 bg-gradient-to-br from-gray-800 to-gray-900 flex items-center justify-center">
+          <div className="animate-pulse text-white text-xl">Loading...</div>
+        </div>
+      )}
+
       {/* Dark Overlay */}
-      <div className="absolute inset-0 " />
+      <div className="absolute inset-0" />
 
       {/* Main Content */}
-      <div className="relative z-10 text-center px-4 sm:px-6 md:px-10 max-w-6xl">
+      <div
+        className={`relative z-10 text-center px-4 sm:px-6 md:px-10 max-w-6xl transition-all duration-700 ease-out ${
+          showContent ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
+        }`}
+      >
         {/* Title */}
         <h1 className="text-4xl bg-black/40 backdrop-blur-sm sm:text-5xl md:text-7xl font-extrabold text-white drop-shadow-xl bg-opacity-40 rounded-lg py-4 px-12 inline-block">
           Welcome To Himachal
