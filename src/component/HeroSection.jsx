@@ -28,15 +28,12 @@ const HeroSection = () => {
 
       {/* Loading fallback gradient */}
       {!imageLoaded && (
-        <div className="absolute inset-0 bg-gradient-to-br bg-white  flex items-center justify-center z-10">
+        <div className="absolute inset-0 bg-gradient-to-br from-green-100  flex items-center justify-center z-10">
           <div className="animate-pulse text-gray-800 text-sm">
             Exploring the world with you...
           </div>
         </div>
       )}
-
-      {/* Dark overlay */}
-      <div className="absolute inset-0 bg-black/30 z-20" />
 
       {/* Main content */}
       <div
@@ -44,13 +41,15 @@ const HeroSection = () => {
           showContent ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
         }`}
       >
-        <h1 className="text-4xl bg-black/40 backdrop-blur-sm sm:text-5xl md:text-7xl font-extrabold text-white drop-shadow-xl rounded-lg py-4 px-12 inline-block">
-          Welcome To Himachal
-        </h1>
-        <div className="bg-white w-full rounded-bl-full rounded-br-full h-[2px] mt-2" />
+        <div className="inline-block">
+          <h1 className="text-4xl bg-black/40 sm:text-5xl md:text-7xl font-extrabold text-white drop-shadow-xl rounded-lg py-4 px-12 inline-block">
+            Welcome To Himachal
+          </h1>
+          <div className="bg-white w-full rounded-bl-full rounded-br-full h-[2px]" />
+        </div>
 
         <div className="flex flex-col items-center gap-6 mt-4 sm:mt-6">
-          <div className="text-lg sm:text-xl md:text-lg font-medium text-white bg-black/40 backdrop-blur-sm py-2 px-12 rounded-lg text-center">
+          <div className="text-lg sm:text-xl md:text-lg font-medium text-white bg-black/40 py-2 px-12 rounded-lg text-center">
             SHIMLA | MANALI | KULLU | KHAJJIAR | DHARAMSHALA | DALHOUSE
           </div>
 
