@@ -1,9 +1,11 @@
+// Updated QuoteFormModal.js
 import { useState, useEffect, useMemo, useCallback, memo } from 'react';
 import { IoMdClose } from 'react-icons/io';
 import { FaPaperPlane } from 'react-icons/fa';
 import toast, { Toaster } from 'react-hot-toast';
 import logo from '../assets/logo.svg';
 import { useLocation } from 'react-router-dom';
+import { useModal } from '../context/ModalContext';
 
 // Constants moved outside component to prevent recreation
 const DESTINATION_MAP = {
@@ -120,7 +122,7 @@ FormInput.displayName = 'FormInput';
 
 // Main Component
 const QuoteFormModal = memo(() => {
-  const [showModal, setShowModal] = useState(false);
+  const { showModal, closeModal, openModal } = useModal();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [formData, setFormData] = useState(INITIAL_FORM_DATA);
   const location = useLocation();
@@ -136,16 +138,16 @@ const QuoteFormModal = memo(() => {
     return DESTINATION_MAP.default;
   }, [location.pathname]);
 
-  // Show modal with delay - only run once
+  // Show modal with delay - only run once on component mount
   useEffect(() => {
-    const timer = setTimeout(() => setShowModal(true), 2000);
+    const timer = setTimeout(() => openModal(), 2000);
     return () => clearTimeout(timer);
-  }, []); // Empty dependency array - only run once
+  }, [openModal]);
 
   // Memoized handlers
   const handleCloseModal = useCallback(() => {
-    setShowModal(false);
-  }, []);
+    closeModal();
+  }, [closeModal]);
 
   const handleInputChange = useCallback((e) => {
     const { name, value } = e.target;
@@ -193,7 +195,7 @@ const QuoteFormModal = memo(() => {
 
         if (result.success) {
           showSuccessToast();
-          setShowModal(false);
+          closeModal();
           setFormData(INITIAL_FORM_DATA);
         } else {
           toast.error(result.message || 'Form submission failed');
@@ -205,7 +207,7 @@ const QuoteFormModal = memo(() => {
         setIsSubmitting(false);
       }
     },
-    [formData, isSubmitting, showSuccessToast]
+    [formData, isSubmitting, showSuccessToast, closeModal]
   );
 
   // Don't render modal if not shown
@@ -217,7 +219,7 @@ const QuoteFormModal = memo(() => {
     <>
       <Toaster position="top-right" />
       <div
-        className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm"
+        className="fixed inset-0 z-50 flex items-center justify-center bg-black/20 backdrop-blur-[2px] transition-all duration-300 ease-out"
         onClick={handleCloseModal}
       >
         <div

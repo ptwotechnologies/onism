@@ -11,6 +11,8 @@ import { MdOutlineWifiCalling3 } from 'react-icons/md';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay } from 'swiper/modules';
 import 'swiper/css';
+
+import { useModal } from '../../context/ModalContext';
 import card1 from '../../assets/cardSection3/card1.png';
 import card2 from '../../assets/cardSection3/card2.png';
 import card3 from '../../assets/cardSection3/card3.png';
@@ -73,6 +75,11 @@ const packages = [
 ];
 
 const PackageCard = ({ pkg }) => {
+  const { openModal } = useModal();
+  function handleGetQuote(e) {
+    e.preventDefault();
+    openModal();
+  }
   return (
     <div className="bg-[#f8f8f8] shadow-md rounded-xl overflow-hidden transition-transform hover:scale-105 hover:shadow-lg w-full flex flex-col min-h-[660px]">
       <div className="relative">
@@ -87,46 +94,49 @@ const PackageCard = ({ pkg }) => {
         </span>
       </div>
 
-      <div className="p-5 flex flex-col flex-grow leading-7">
-        <h2 className="text-xl font-bold text-gray-900">{pkg.title}</h2>
-        <p className="text-gray-700 mt-2 flex items-center gap-1">
-          <FaClock className="text-gray-500" /> {pkg.nights}
-        </p>
-        <p className="text-[#333] font-semibold mt-2">{pkg.price}</p>
-
-        <div className="mt-2">
-          <p className="font-semibold text-gray-800 flex items-center gap-1">
-            <FaMapMarkerAlt className="text-gray-600" /> Places to visit:
+      <div className="p-5 flex flex-col flex-grow">
+        <div>
+          <h2 className="text-xl font-bold text-gray-900">{pkg.title}</h2>
+          <p className="text-gray-700 mt-2 flex items-center gap-1">
+            <FaClock className="text-gray-500" /> {pkg.nights}
           </p>
-          <div className="flex flex-wrap gap-1 mt-2">
-            {pkg.places.map((place, idx) => (
-              <span
-                key={idx}
-                className="text-xs px-2 py-1 bg-gray-500 rounded-full text-white"
-              >
-                {place}
-              </span>
-            ))}
+          <p className="text-[#333] font-semibold mt-2">{pkg.price}</p>
+
+          <div className="mt-2">
+            <p className="font-semibold text-gray-800 flex items-center gap-1">
+              <FaMapMarkerAlt className="text-gray-600" /> Places to visit:
+            </p>
+            <div className="flex flex-wrap gap-1 mt-2">
+              {pkg.places.map((place, idx) => (
+                <span
+                  key={idx}
+                  className="text-xs px-2 py-1 bg-gray-500 rounded-full text-white"
+                >
+                  {place}
+                </span>
+              ))}
+            </div>
+          </div>
+
+          <div className="mt-4">
+            <p className="font-bold text-gray-800 flex items-center gap-2">
+              <BsSuitcase2 className="text-gray-900" /> Package Inclusions:
+            </p>
+            <ul className="text-gray-500 text-[16px] mt-1 divide-y divide-gray-300">
+              {pkg.inclusions.map((item, idx) => (
+                <li
+                  key={idx}
+                  className="flex items-center gap-3 py-3 tracking-wide leading-relaxed"
+                >
+                  <FaCheckDouble className="text-gray-500" /> {item}
+                </li>
+              ))}
+            </ul>
           </div>
         </div>
 
-        <div className="mt-4 flex-grow">
-          <p className="font-bold text-gray-800 flex items-center gap-2">
-            <BsSuitcase2 className="text-gray-900" /> Package Inclusions:
-          </p>
-          <ul className="text-gray-500 text-[16px] mt-1 divide-y divide-gray-300">
-            {pkg.inclusions.map((item, idx) => (
-              <li
-                key={idx}
-                className="flex items-center gap-3 py-3 tracking-wide leading-relaxed"
-              >
-                <FaCheckDouble className="text-gray-500" /> {item}
-              </li>
-            ))}
-          </ul>
-        </div>
-
-        <div className="mt-6 flex justify-between items-center">
+        {/* This container will be pushed to the bottom */}
+        <div className="mt-auto pt-6 flex justify-between items-center">
           <div className="flex gap-3">
             <a
               href="https://wa.link/5bi0km"
@@ -145,18 +155,18 @@ const PackageCard = ({ pkg }) => {
             </a>
           </div>
 
-          <div className="flex items-center gap-2 bg-white border border-green-600 text-green-600 px-4 py-2 rounded-full hover:bg-green-600 hover:text-white transition duration-300 cursor-pointer">
+          <button
+            onClick={handleGetQuote}
+            className="flex items-center gap-2 bg-white border border-green-600 text-green-600 px-4 py-2 rounded-full hover:bg-green-600 hover:text-white transition duration-300 cursor-pointer"
+          >
             <FaTelegramPlane />
-            <a href="/">
-              <span className="font-semibold">Get a Quote</span>
-            </a>
-          </div>
+            <span className="font-semibold">Get a Quote</span>
+          </button>
         </div>
       </div>
     </div>
   );
 };
-
 const CardSection3 = () => {
   return (
     <>

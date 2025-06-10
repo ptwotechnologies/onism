@@ -1,4 +1,5 @@
-import React, { Suspense, lazy, memo } from 'react';
+import { Suspense, lazy, memo } from 'react';
+
 import LoadingSpinner from '../component/LoadingSpinner';
 
 // Lazy load below-the-fold components
@@ -19,6 +20,7 @@ import Form from '../component/Form';
 import FloatingButtons from '../component/FloatingButtons';
 import ScrollToTop from '../component/ScrollToTop';
 import Footer from '../component/Footer';
+import QuoteFormModal from '../component/Form';
 
 const Home = memo(() => {
   return (
@@ -41,9 +43,12 @@ const Home = memo(() => {
         <ImageSlider />
         <Footer />
       </Suspense>
+
+      {/* Modal */}
+      <QuoteFormModal />
     </div>
   );
 });
 
-Home.displayName = 'Home';
+Home.displayName = 'Himachal';
 export default Home;

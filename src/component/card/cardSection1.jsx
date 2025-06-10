@@ -1,3 +1,4 @@
+// Updated cardSection1.js (and apply same pattern to other 7 card sections)
 import React from 'react';
 import { FaClock, FaMapMarkerAlt } from 'react-icons/fa';
 import { BsSuitcase2 } from 'react-icons/bs';
@@ -7,6 +8,7 @@ import { MdOutlineWifiCalling3 } from 'react-icons/md';
 import { FaTelegramPlane } from 'react-icons/fa';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay } from 'swiper/modules';
+import { useModal } from '../../context/ModalContext';
 import 'swiper/css';
 
 import card1 from '../../assets/cardSection1/card1.png';
@@ -54,8 +56,15 @@ const packages = [
 ];
 
 const PackageCard = ({ pkg }) => {
+  const { openModal } = useModal();
+
+  const handleGetQuote = (e) => {
+    e.preventDefault();
+    openModal();
+  };
+
   return (
-    <div className="bg-[#f8f8f8] shadow-md rounded-xl overflow-hidden transition-transform hover:scale-105 hover:shadow-lg max-w-sm mx-auto">
+    <div className="bg-[#f8f8f8] shadow-md rounded-xl overflow-hidden transition-transform hover:scale-105 hover:shadow-lg max-w-sm mx-auto flex flex-col h-full">
       {/* Image & Discount Badge */}
       <div className="relative">
         <img
@@ -70,7 +79,7 @@ const PackageCard = ({ pkg }) => {
       </div>
 
       {/* Content */}
-      <div className="p-5 leading-7">
+      <div className="p-5 leading-7 flex-grow">
         <h2 className="text-2xl font-bold text-gray-900">{pkg.title}</h2>
 
         {/* Nights & Price */}
@@ -121,7 +130,11 @@ const PackageCard = ({ pkg }) => {
             ))}
           </ul>
         </div>
-        <div className="flex justify-between items-center mt-6">
+      </div>
+
+      {/* Fixed Bottom Action Buttons */}
+      <div className="p-5 border-t border-gray-200 mt-auto">
+        <div className="flex justify-between items-center">
           {/* Left Icons */}
           <div className="flex gap-3">
             <a
@@ -142,12 +155,13 @@ const PackageCard = ({ pkg }) => {
           </div>
 
           {/* Right Quote Button */}
-          <div className="flex items-center gap-2 bg-white border border-green-600 text-green-600 px-4 py-2 rounded-full hover:bg-green-600 hover:text-white transition duration-300 cursor-pointer">
+          <button
+            onClick={handleGetQuote}
+            className="flex items-center gap-2 bg-white border border-green-600 text-green-600 px-4 py-2 rounded-full hover:bg-green-600 hover:text-white transition duration-300 cursor-pointer"
+          >
             <FaTelegramPlane />
-            <a href="/">
-              <span className="font-semibold">Get a Quote</span>
-            </a>
-          </div>
+            <span className="font-semibold">Get a Quote</span>
+          </button>
         </div>
       </div>
     </div>

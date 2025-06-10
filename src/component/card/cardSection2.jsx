@@ -11,6 +11,7 @@ import { MdOutlineWifiCalling3 } from 'react-icons/md';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay } from 'swiper/modules';
 import 'swiper/css';
+import { useModal } from '../../context/ModalContext';
 
 import tour1 from '../../assets/cardSection2/card1.png';
 import tour2 from '../../assets/cardSection2/card2.png';
@@ -94,8 +95,14 @@ const packages = [
 ];
 
 const PackageCard = ({ pkg }) => {
+  const { openModal } = useModal();
+
+  const handleGetQuote = (e) => {
+    e.preventDefault();
+    openModal();
+  };
   return (
-    <div className="bg-[#f8f8f8] shadow-md rounded-xl overflow-hidden transition-transform hover:scale-105 hover:shadow-lg max-w-sm mx-auto">
+    <div className="bg-[#f8f8f8] shadow-md rounded-xl overflow-hidden transition-transform hover:scale-105 hover:shadow-lg max-w-sm mx-auto flex flex-col h-full">
       <div className="relative">
         <img
           src={pkg.image}
@@ -108,7 +115,7 @@ const PackageCard = ({ pkg }) => {
         </span>
       </div>
       All checks have failed 1 failing check
-      <div className="p-5 leading-7">
+      <div className="p-5 leading-7 flex-grow flex flex-col">
         <h2 className="text-xl font-bold text-gray-900">{pkg.title}</h2>
 
         <p className="text-gray-700 mt-2 flex items-center gap-1">
@@ -132,7 +139,7 @@ const PackageCard = ({ pkg }) => {
           </div>
         </div>
 
-        <div className="mt-4">
+        <div className="mt-4 flex-grow">
           <p className="font-bold text-gray-800 flex items-center gap-2">
             <BsSuitcase2 className="text-gray-900" /> Package Inclusions:
           </p>
@@ -148,7 +155,7 @@ const PackageCard = ({ pkg }) => {
           </ul>
         </div>
 
-        <div className="flex justify-between items-center mt-6">
+        <div className="flex justify-between items-center mt-6 ">
           <div className="flex gap-3">
             <a
               href="https://wa.link/5bi0km"
@@ -167,12 +174,13 @@ const PackageCard = ({ pkg }) => {
             </a>
           </div>
 
-          <div className="flex items-center gap-2 bg-white border border-green-600 text-green-600 px-4 py-2 rounded-full hover:bg-green-600 hover:text-white transition duration-300 cursor-pointer">
+          <button
+            onClick={handleGetQuote}
+            className="flex items-center gap-2 bg-white border border-green-600 text-green-600 px-4 py-2 rounded-full hover:bg-green-600 hover:text-white transition duration-300 cursor-pointer"
+          >
             <FaTelegramPlane />
-            <a href="/">
-              <span className="font-semibold">Get a Quote</span>
-            </a>
-          </div>
+            <span className="font-semibold">Get a Quote</span>
+          </button>
         </div>
       </div>
     </div>

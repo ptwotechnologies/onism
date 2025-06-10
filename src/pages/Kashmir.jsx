@@ -17,6 +17,7 @@ import Form from '../component/Form';
 import FloatingButtons from '../component/FloatingButtons';
 import ScrollToTop from '../component/ScrollToTop';
 import Footer from '../component/Footer';
+import QuoteFormModal from '../component/Form';
 
 const Kashmir = memo(() => {
   return (
@@ -37,6 +38,8 @@ const Kashmir = memo(() => {
         <ImageSlider />
         <Footer />
       </Suspense>
+
+      <QuoteFormModal />
     </div>
   );
 });

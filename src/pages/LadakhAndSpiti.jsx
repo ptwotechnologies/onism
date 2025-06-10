@@ -17,6 +17,7 @@ import Form from '../component/Form';
 import FloatingButtons from '../component/FloatingButtons';
 import ScrollToTop from '../component/ScrollToTop';
 import Footer from '../component/Footer';
+import QuoteFormModal from '../component/Form';
 
 const LadakhAndSpiti = memo(() => {
   return (
@@ -37,6 +38,9 @@ const LadakhAndSpiti = memo(() => {
         <ImageSlider />
         <Footer />
       </Suspense>
+
+      {/* Modal */}
+      <QuoteFormModal />
     </div>
   );
 });
