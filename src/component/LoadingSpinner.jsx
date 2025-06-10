@@ -34,7 +34,9 @@ const LoadingSpinner = ({ fullScreen = false, minHeight = '50vh' }) => {
             animation: 'spin 1.5s linear infinite',
           }}
         />
-        <p className="text-sm text-gray-600 animate-pulse">Loading...</p>
+        <p className="text-sm text-gray-600 animate-pulse">
+          Exploring the world with you...
+        </p>
       </div>
       <style>
         {`

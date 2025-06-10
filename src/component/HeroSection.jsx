@@ -28,8 +28,10 @@ const HeroSection = () => {
 
       {/* Loading fallback gradient */}
       {!imageLoaded && (
-        <div className="absolute inset-0 bg-gradient-to-br from-gray-800 to-gray-900 flex items-center justify-center z-10">
-          <div className="animate-pulse text-white text-xl">Loading...</div>
+        <div className="absolute inset-0 bg-gradient-to-br bg-white  flex items-center justify-center z-10">
+          <div className="animate-pulse text-gray-800 text-sm">
+            Exploring the world with you...
+          </div>
         </div>
       )}
 
