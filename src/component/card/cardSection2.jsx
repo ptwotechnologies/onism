@@ -114,7 +114,6 @@ const PackageCard = ({ pkg }) => {
           {pkg.discount}
         </span>
       </div>
-      All checks have failed 1 failing check
       <div className="p-5 leading-7 flex-grow flex flex-col">
         <h2 className="text-xl font-bold text-gray-900">{pkg.title}</h2>
 
