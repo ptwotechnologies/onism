@@ -1,4 +1,4 @@
-// Updated QuoteFormModal.js
+// Updated QuoteFormModal.js with Analytics
 import { useState, useEffect, useMemo, useCallback, memo } from 'react';
 import { IoMdClose } from 'react-icons/io';
 import { FaPaperPlane } from 'react-icons/fa';
@@ -6,6 +6,12 @@ import toast, { Toaster } from 'react-hot-toast';
 import logo from '../assets/logo.svg';
 import { useLocation } from 'react-router-dom';
 import { useModal } from '../context/ModalContext';
+import {
+  trackFormSubmission,
+  trackCustomEvent,
+  trackPhoneClick,
+  trackEmailClick,
+} from '../utils/analytics';
 
 // Constants moved outside component to prevent recreation
 const DESTINATION_MAP = {
@@ -56,67 +62,101 @@ const INITIAL_FORM_DATA = {
   city: '',
 };
 
-// Custom Toast Component - Memoized
-const CustomToast = memo(({ t, onDismiss }) => (
-  <div
-    className={`bg-white w-[95vw] sm:w-[100vw] max-w-[90%] sm:max-w-sm rounded-xl shadow-lg border border-gray-300 p-4 mt-20 ${
-      t.visible ? 'animate-enter' : 'animate-leave'
-    } fixed sm:top-16 top-[70px] ${
-      window.innerWidth < 640 ? 'left-1/2 -translate-x-1/2' : 'right-6'
-    } z-[9999]`}
-  >
-    <div className="flex justify-between items-center mb-2">
-      <img
-        src={logo}
-        alt="Logo"
-        className="w-32 h-10 object-contain"
-        loading="lazy"
-      />
-      <button onClick={onDismiss} aria-label="Close notification">
-        <IoMdClose className="text-xl text-gray-600 hover:text-black transition" />
-      </button>
+// Custom Toast Component - Memoized with Analytics
+const CustomToast = memo(({ t, onDismiss }) => {
+  // Track when phone number is clicked in toast
+  const handlePhoneClick = useCallback(() => {
+    trackPhoneClick('8580787896', 'success_toast');
+  }, []);
+
+  // Track when email is clicked in toast
+  const handleEmailClick = useCallback(() => {
+    trackEmailClick('info@onismtourhimachal.in', 'success_toast');
+  }, []);
+
+  return (
+    <div
+      className={`bg-white w-[95vw] sm:w-[100vw] max-w-[90%] sm:max-w-sm rounded-xl shadow-lg border border-gray-300 p-4 mt-20 ${
+        t.visible ? 'animate-enter' : 'animate-leave'
+      } fixed sm:top-16 top-[70px] ${
+        window.innerWidth < 640 ? 'left-1/2 -translate-x-1/2' : 'right-6'
+      } z-[9999]`}
+    >
+      <div className="flex justify-between items-center mb-2">
+        <img
+          src={logo}
+          alt="Logo"
+          className="w-32 h-10 object-contain"
+          loading="lazy"
+        />
+        <button onClick={onDismiss} aria-label="Close notification">
+          <IoMdClose className="text-xl text-gray-600 hover:text-black transition" />
+        </button>
+      </div>
+      <hr className="mb-3" />
+      <div className="text-[18px] text-gray-700 leading-relaxed text-center sm:text-left">
+        <p className="font-bold text-black text-[22px]">
+          We've received your request.
+        </p>
+        <p className="text-[17px]">
+          Our representative will contact you shortly.
+          <br />
+          For urgent assistance, call{' '}
+          <a
+            href="tel:8580787896"
+            onClick={handlePhoneClick}
+            className="font-semibold text-green-600 hover:underline cursor-pointer"
+          >
+            8580787896
+          </a>{' '}
+          or email{' '}
+          <a
+            href="mailto:info@onismtourhimachal.in"
+            onClick={handleEmailClick}
+            className="font-semibold text-green-600 hover:underline cursor-pointer"
+          >
+            info@onismtourhimachal.in
+          </a>
+        </p>
+      </div>
     </div>
-    <hr className="mb-3" />
-    <div className="text-[18px] text-gray-700 leading-relaxed text-center sm:text-left">
-      <p className="font-bold text-black text-[22px]">
-        We've received your request.
-      </p>
-      <p className="text-[17px]">
-        Our representative will contact you shortly.
-        <br />
-        For urgent assistance, call{' '}
-        <span className="font-semibold text-green-600">8580787896</span> or
-        email{' '}
-        <span className="font-semibold text-green-600">
-          info@onismtourhimachal.in
-        </span>
-      </p>
-    </div>
-  </div>
-));
+  );
+});
 
 CustomToast.displayName = 'CustomToast';
 
-// Form Input Component - Memoized
-const FormInput = memo(({ label, id, type, value, onChange }) => (
-  <div>
-    <label
-      htmlFor={id}
-      className="block text-sm font-medium text-gray-700 mb-1"
-    >
-      {label}
-    </label>
-    <input
-      id={id}
-      name={id}
-      type={type}
-      required
-      value={value}
-      onChange={onChange}
-      className="w-full border border-gray-300 px-3 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all"
-    />
-  </div>
-));
+// Form Input Component - Memoized with Analytics
+const FormInput = memo(({ label, id, type, value, onChange }) => {
+  // Track when user starts filling specific fields
+  const handleFocus = useCallback(() => {
+    trackCustomEvent('form_field_focus', {
+      event_category: 'form_interaction',
+      field_name: id,
+      form_name: 'quote_request_modal',
+    });
+  }, [id]);
+
+  return (
+    <div>
+      <label
+        htmlFor={id}
+        className="block text-sm font-medium text-gray-700 mb-1"
+      >
+        {label}
+      </label>
+      <input
+        id={id}
+        name={id}
+        type={type}
+        required
+        value={value}
+        onChange={onChange}
+        onFocus={handleFocus}
+        className="w-full border border-gray-300 px-3 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all"
+      />
+    </div>
+  );
+});
 
 FormInput.displayName = 'FormInput';
 
@@ -140,18 +180,57 @@ const QuoteFormModal = memo(() => {
 
   // Show modal with delay - only run once on component mount
   useEffect(() => {
-    const timer = setTimeout(() => openModal(), 2000);
+    const timer = setTimeout(() => {
+      openModal();
+      // Track modal display
+      trackCustomEvent('modal_displayed', {
+        event_category: 'modal',
+        modal_type: 'quote_form',
+        page_path: location.pathname,
+        delay_seconds: 2,
+      });
+    }, 2000);
     return () => clearTimeout(timer);
-  }, [openModal]);
+  }, [openModal, location.pathname]);
 
   // Memoized handlers
   const handleCloseModal = useCallback(() => {
+    // Track modal close
+    trackCustomEvent('modal_closed', {
+      event_category: 'modal',
+      modal_type: 'quote_form',
+      close_method: 'close_button',
+    });
+    closeModal();
+  }, [closeModal]);
+
+  const handleBackdropClick = useCallback(() => {
+    // Track modal close via backdrop
+    trackCustomEvent('modal_closed', {
+      event_category: 'modal',
+      modal_type: 'quote_form',
+      close_method: 'backdrop_click',
+    });
     closeModal();
   }, [closeModal]);
 
   const handleInputChange = useCallback((e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
+  }, []);
+
+  // Track destination selection
+  const handleDestinationChange = useCallback((e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+
+    if (value) {
+      trackCustomEvent('destination_selected', {
+        event_category: 'form_interaction',
+        destination: value,
+        form_location: 'quote_modal',
+      });
+    }
   }, []);
 
   const showSuccessToast = useCallback(() => {
@@ -166,6 +245,13 @@ const QuoteFormModal = memo(() => {
 
       if (isSubmitting) return;
       setIsSubmitting(true);
+
+      // Track form submission start
+      trackCustomEvent('form_submission_started', {
+        event_category: 'form_interaction',
+        form_name: 'quote_request_modal',
+        destination: formData.destination,
+      });
 
       // Track conversion
       if (typeof window !== 'undefined' && window.gtag_report_conversion) {
@@ -194,20 +280,55 @@ const QuoteFormModal = memo(() => {
         const result = await response.json();
 
         if (result.success) {
+          // Track successful form submission
+          trackFormSubmission({
+            form_name: 'quote_request_modal',
+            form_location: 'modal_popup',
+            destination: formData.destination,
+            form_data: {
+              has_email: !!formData.email,
+              has_phone: !!formData.mobile,
+              has_city: !!formData.city,
+              page_path: location.pathname,
+            },
+          });
+
+          // Track successful lead generation
+          trackCustomEvent('lead_generated', {
+            event_category: 'conversion',
+            lead_source: 'quote_form_modal',
+            destination: formData.destination,
+            value: 1,
+          });
+
           showSuccessToast();
           closeModal();
           setFormData(INITIAL_FORM_DATA);
         } else {
+          // Track form submission error
+          trackCustomEvent('form_submission_error', {
+            event_category: 'form_error',
+            error_type: 'api_error',
+            error_message: result.message || 'Unknown error',
+          });
           toast.error(result.message || 'Form submission failed');
         }
       } catch (error) {
         console.error('Form Error:', error);
+
+        // Track network/technical error
+        trackCustomEvent('form_submission_error', {
+          event_category: 'form_error',
+          error_type: 'network_error',
+          error_message: error.message,
+        });
+
         toast.error('Something went wrong! Please try again.');
       } finally {
         setIsSubmitting(false);
       }
     },
-    [formData, isSubmitting, showSuccessToast, closeModal]
+    [formData, isSubmitting, showSuccessToast, closeModal, location.pathname]
   );
 
   // Don't render modal if not shown
@@ -220,7 +341,7 @@ const QuoteFormModal = memo(() => {
       <Toaster position="top-right" />
       <div
         className="fixed inset-0 z-50 flex items-center justify-center bg-black/20 backdrop-blur-[2px] transition-all duration-300 ease-out"
-        onClick={handleCloseModal}
+        onClick={handleBackdropClick}
       >
         <div
           className="bg-white w-full max-w-lg mx-4 rounded-xl shadow-2xl relative font-sans transform transition-all"
@@ -253,7 +374,14 @@ const QuoteFormModal = memo(() => {
                   name="destination"
                   required
                   value={formData.destination}
-                  onChange={handleInputChange}
+                  onChange={handleDestinationChange}
+                  onFocus={() =>
+                    trackCustomEvent('form_field_focus', {
+                      event_category: 'form_interaction',
+                      field_name: 'destination',
+                      form_name: 'quote_request_modal',
+                    })
+                  }
                   className="w-full border border-gray-300 px-3 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all"
                 >
                   <option value="">Choose your Destination</option>
@@ -279,6 +407,15 @@ const QuoteFormModal = memo(() => {
               <button
                 type="submit"
                 disabled={isSubmitting}
+                onClick={() => {
+                  if (!isSubmitting) {
+                    trackCustomEvent('form_submit_button_clicked', {
+                      event_category: 'form_interaction',
+                      form_name: 'quote_request_modal',
+                      destination: formData.destination,
+                    });
+                  }
+                }}
                 className={`mt-6 w-full ${
                   isSubmitting
                     ? 'bg-gray-400 cursor-not-allowed'

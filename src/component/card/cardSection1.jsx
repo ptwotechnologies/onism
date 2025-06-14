@@ -1,4 +1,4 @@
-// Updated cardSection1.js (and apply same pattern to other 7 card sections)
+// Updated cardSection1.js with Analytics Integration
 import React from 'react';
 import { FaClock, FaMapMarkerAlt } from 'react-icons/fa';
 import { BsSuitcase2 } from 'react-icons/bs';
@@ -10,6 +10,13 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay } from 'swiper/modules';
 import { useModal } from '../../context/ModalContext';
 import 'swiper/css';
+
+// Import analytics functions
+import {
+  trackPhoneClick,
+  trackPackageClick,
+  trackCustomEvent,
+} from '../../utils/analytics';
 
 import card1 from '../../assets/cardSection1/card1.avif';
 import card2 from '../../assets/cardSection1/card2.avif';
@@ -24,6 +31,7 @@ const packages = [
     places: ['Delhi', 'Shimla', 'Kufri', 'Kullu', 'Manali'],
     discount: '6% OFF',
     image: card1,
+    packageName: 'Shimla_Manali_Honeymoon_Package', // For analytics tracking
   },
   {
     id: 2,
@@ -33,6 +41,7 @@ const packages = [
     places: ['Delhi', 'Manali', 'Solang Valley', 'Atal Tunnel', 'Kullu'],
     discount: '8% OFF',
     image: card2,
+    packageName: 'Manali_Honeymoon_Package', // For analytics tracking
   },
   {
     id: 3,
@@ -52,16 +61,77 @@ const packages = [
     ],
     discount: '7% OFF',
     image: card3,
+    packageName: 'Jibhi_Tirthan_Kasol_Manali_Package', // For analytics tracking
   },
 ];
 
 const PackageCard = ({ pkg }) => {
   const { openModal } = useModal();
 
+  // Handle Get Quote button click with analytics
   const handleGetQuote = (e) => {
     e.preventDefault();
+
+    // Track the quote request
+    trackPackageClick(pkg.packageName, 'get_quote', {
+      package_price: pkg.price,
+      package_duration: pkg.nights,
+      package_discount: pkg.discount,
+      click_location: 'package_card',
+    });
+
     openModal();
   };
+
+  // Handle WhatsApp click with analytics
+  const handleWhatsAppClick = () => {
+    trackCustomEvent('whatsapp_click', {
+      event_category: 'contact',
+      event_label: `${pkg.packageName}_whatsapp`,
+      package_name: pkg.packageName,
+      contact_method: 'whatsapp',
+      click_location: 'package_card',
+      value: 1,
+    });
+  };
+
+  // Handle Phone call click with analytics
+  const handlePhoneClick = () => {
+    trackPhoneClick('+919459618859', 'package_card');
+
+    // Additional tracking for package-specific phone calls
+    trackCustomEvent('package_phone_call', {
+      event_category: 'contact',
+      event_label: `${pkg.packageName}_phone`,
+      package_name: pkg.packageName,
+      phone_number: '+919459618859',
+      click_location: 'package_card',
+      value: 1,
+    });
+  };
+
+  // Handle package card view (when card comes into view)
+  const handlePackageView = () => {
+    trackPackageClick(pkg.packageName, 'card_view', {
+      package_price: pkg.price,
+      package_duration: pkg.nights,
+      package_discount: pkg.discount,
+      view_location: 'package_listing',
+    });
+  };
+
+  // Handle package image click
+  const handleImageClick = () => {
+    trackPackageClick(pkg.packageName, 'image_click', {
+      package_price: pkg.price,
+      click_location: 'package_card_image',
+    });
+  };
+
+  // Track when component mounts (package is viewed)
+  React.useEffect(() => {
+    handlePackageView();
+  }, []);
 
   return (
     <div className="bg-[#f8f8f8] shadow-md rounded-xl overflow-hidden transition-transform hover:scale-105 hover:shadow-lg max-w-sm mx-auto flex flex-col h-full">
@@ -70,8 +140,9 @@ const PackageCard = ({ pkg }) => {
         <img
           src={pkg.image}
           alt={pkg.title}
-          className="w-full h-56 object-cover"
+          className="w-full h-56 object-cover cursor-pointer"
           loading="lazy"
+          onClick={handleImageClick}
         />
         <span className="absolute top-3 left-3 bg-green-600 text-white text-xs font-semibold px-3 py-1 rounded-full shadow-md">
           {pkg.discount}
@@ -141,13 +212,14 @@ const PackageCard = ({ pkg }) => {
               href="https://wa.link/5bi0km"
               target="_blank"
               rel="noopener noreferrer"
+              onClick={handleWhatsAppClick}
             >
               <div className="p-2 rounded-full bg-white border border-green-600 text-green-600 hover:bg-green-600 hover:text-white transition duration-300">
                 <FaWhatsapp size={20} />
               </div>
             </a>
 
-            <a href="tel:+919459618859">
+            <a href="tel:+919459618859" onClick={handlePhoneClick}>
               <div className="p-2 rounded-full bg-white border border-green-600 text-green-600 hover:bg-green-600 hover:text-white transition duration-300">
                 <MdOutlineWifiCalling3 size={20} />
               </div>
@@ -169,6 +241,17 @@ const PackageCard = ({ pkg }) => {
 };
 
 const TravelPackages = () => {
+  // Track when the packages section is viewed
+  React.useEffect(() => {
+    trackCustomEvent('packages_section_view', {
+      event_category: 'engagement',
+      event_label: 'best_selling_himachal_packages',
+      section_name: 'Best Selling Himachal Tour Packages',
+      packages_count: packages.length,
+      value: 1,
+    });
+  }, []);
+
   return (
     <>
       <h1 className="text-center text-xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-black mt-6 sm:mt-10 leading-snug sm:leading-tight tracking-tight">
@@ -184,6 +267,17 @@ const TravelPackages = () => {
             slidesPerView={1}
             loop={true}
             autoplay={{ delay: 3000 }}
+            onSlideChange={(swiper) => {
+              // Track slide changes in mobile carousel
+              const currentPackage = packages[swiper.realIndex];
+              trackCustomEvent('mobile_carousel_slide', {
+                event_category: 'engagement',
+                event_label: currentPackage.packageName,
+                slide_index: swiper.realIndex,
+                package_name: currentPackage.packageName,
+                value: 1,
+              });
+            }}
           >
             {packages.map((pkg) => (
               <SwiperSlide key={pkg.id}>

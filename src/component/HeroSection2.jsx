@@ -1,10 +1,18 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import heroImage from '../assets/Hero2.avif';
 import { FaTelegramPlane } from 'react-icons/fa';
-
+import { trackLadakhPackageClick } from '../utils/analytics';
 const HeroSection2 = () => {
   const [imageLoaded, setImageLoaded] = useState(false);
   const [showContent, setShowContent] = useState(false);
+
+  const handleLadakhClick = useCallback(() => {
+    trackLadakhPackageClick('hero_section_explore', {
+      button_text: 'Explore More',
+      section: 'main_hero',
+      component: 'HeroSection',
+    });
+  }, []);
 
   useEffect(() => {
     const img = new Image();
@@ -57,14 +65,15 @@ const HeroSection2 = () => {
             LEH | KHARDUNGLA | PANGONG | NUBRA | SPITI | KAZA
           </div>
 
-          <a href="#">
-            <button className="px-6 sm:px-8 py-2 bg-[#63AB45] hover:bg-[#F7921E] text-white text-sm sm:text-lg font-semibold rounded-full w-[220px] sm:w-[250px] flex items-center justify-between transition-all duration-300 delay-150 hover:delay-150 shadow-lg mx-auto overflow-hidden">
-              <span className="pl-1">Explore More</span>
-              <span className="bg-white p-2 rounded-full text-black shadow-md flex items-center justify-center transition-all duration-300 delay-200 hover:scale-110">
-                <FaTelegramPlane size={25} />
-              </span>
-            </button>
-          </a>
+          <button
+            onClick={handleLadakhClick}
+            className="px-6 sm:px-8 py-2 bg-[#63AB45] hover:bg-[#F7921E] text-white text-sm sm:text-lg font-semibold rounded-full w-[220px] sm:w-[250px] flex items-center justify-between transition-all duration-300 delay-150 hover:delay-150 shadow-lg mx-auto overflow-hidden"
+          >
+            <span className="pl-1">Explore More</span>
+            <span className="bg-white p-2 rounded-full text-black shadow-md flex items-center justify-center transition-all duration-300 delay-200 hover:scale-110">
+              <FaTelegramPlane size={25} />
+            </span>
+          </button>
         </div>
       </div>
     </div>

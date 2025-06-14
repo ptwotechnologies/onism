@@ -28,6 +28,45 @@ const HeroSection = () => {
     img.src = getImageSrc();
   }, []);
 
+  // Analytics tracking functions
+  const handleExploreMoreClick = () => {
+    // Track the main CTA button click
+    if (typeof window !== 'undefined' && window.gtag) {
+      window.gtag('event', 'cta_click', {
+        event_category: 'engagement',
+        event_label: 'hero_explore_more',
+        value: 1,
+      });
+    }
+
+    // Also track as a booking inquiry since it's the main CTA
+    if (typeof window !== 'undefined' && window.trackBookingInquiry) {
+      window.trackBookingInquiry('Hero Section - Explore More');
+    }
+  };
+
+  const handleDestinationClick = (destination) => {
+    // Track interest in specific destinations
+    if (typeof window !== 'undefined' && window.gtag) {
+      window.gtag('event', 'destination_interest', {
+        event_category: 'engagement',
+        event_label: destination,
+        value: 1,
+      });
+    }
+  };
+
+  // Track hero section view
+  useEffect(() => {
+    if (showContent && typeof window !== 'undefined' && window.gtag) {
+      window.gtag('event', 'hero_section_view', {
+        event_category: 'engagement',
+        event_label: 'hero_loaded',
+        value: 1,
+      });
+    }
+  }, [showContent]);
+
   return (
     <div className="relative w-full h-screen flex items-center justify-center overflow-hidden">
       {/* Hero Image optimized for LCP with responsive sources */}
@@ -92,18 +131,37 @@ const HeroSection = () => {
         </div>
 
         <div className="flex flex-col items-center gap-4 sm:gap-6 mt-4 sm:mt-6">
-          <div className="text-sm sm:text-base md:text-lg font-medium text-white bg-black/50 backdrop-blur-sm py-2 px-4 sm:px-8 md:px-12 rounded-lg text-center">
-            SHIMLA | MANALI | KULLU | KHAJJIAR | DHARAMSHALA | DALHOUSE
+          {/* Clickable destination tags */}
+          <div className="text-sm sm:text-base md:text-lg font-medium text-white bg-black/50 backdrop-blur-sm py-2 px-4 sm:px-8 md:px-12 rounded-lg text-center cursor-pointer hover:bg-black/60 transition-colors duration-200">
+            {[
+              'SHIMLA',
+              'MANALI',
+              'KULLU',
+              'KHAJJIAR',
+              'DHARAMSHALA',
+              'DALHOUSE',
+            ].map((destination, index) => (
+              <span key={destination}>
+                <span
+                  className="hover:text-green-300 transition-colors duration-200 cursor-pointer"
+                  onClick={() => handleDestinationClick(destination)}
+                >
+                  {destination}
+                </span>
+                {index < 5 && ' | '}
+              </span>
+            ))}
           </div>
 
-          <a href="#" className="inline-block">
-            <button className="px-6 sm:px-8 py-2 bg-[#63AB45] hover:bg-[#F7921E] text-white text-sm sm:text-base md:text-lg font-semibold rounded-full w-[200px] sm:w-[220px] md:w-[250px] flex items-center justify-between transition-colors duration-300 shadow-lg overflow-hidden touch-manipulation">
-              <span className="pl-1">Explore More</span>
-              <span className="bg-white p-2 rounded-full text-black shadow-md flex items-center justify-center transition-transform duration-200 hover:scale-110">
-                <FaTelegramPlane size={20} className="sm:w-6 sm:h-6" />
-              </span>
-            </button>
-          </a>
+          <button
+            onClick={handleExploreMoreClick}
+            className="px-6 sm:px-8 py-2 bg-[#63AB45] hover:bg-[#F7921E] text-white text-sm sm:text-base md:text-lg font-semibold rounded-full w-[200px] sm:w-[220px] md:w-[250px] flex items-center justify-between transition-colors duration-300 shadow-lg overflow-hidden touch-manipulation"
+          >
+            <span className="pl-1">Explore More</span>
+            <span className="bg-white p-2 rounded-full text-black shadow-md flex items-center justify-center transition-transform duration-200 hover:scale-110">
+              <FaTelegramPlane size={20} className="sm:w-6 sm:h-6" />
+            </span>
+          </button>
         </div>
       </div>
     </div>

@@ -26,7 +26,7 @@
 
     <!-- Open Graph / Facebook Meta Tags -->
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://www.onismtourhimachal.in/" />
+    <meta property="og:url" content="https://www.onismtourhimachal.com/" />
     <meta property="og:site_name" content="ONISM Tour" />
     <meta
       property="og:title"
@@ -38,7 +38,7 @@
     />
     <meta
       property="og:image"
-      content="https://www.onismtourhimachal.in/assets/social-preview.jpg"
+      content="https://www.onismtourhimachal.com/assets/social-preview.jpg"
     />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
@@ -49,7 +49,7 @@
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:site" content="@onism_tour" />
     <meta name="twitter:creator" content="@onism_tour" />
-    <meta name="twitter:url" content="https://www.onismtourhimachal.in/" />
+    <meta name="twitter:url" content="https://www.onismtourhimachal.com/" />
     <meta
       name="twitter:title"
       content="ONISM Tour - Best Travel Agency in India"
@@ -60,7 +60,7 @@
     />
     <meta
       name="twitter:image"
-      content="https://www.onismtourhimachal.in/assets/social-preview.jpg"
+      content="https://www.onismtourhimachal.com/assets/social-preview.jpg"
     />
     <meta name="twitter:image:alt" content="ONISM Tour - Travel Agency India" />
 
@@ -72,7 +72,7 @@
     />
 
     <!-- Canonical URL -->
-    <link rel="canonical" href="https://www.onismtourhimachal.in/" />
+    <link rel="canonical" href="https://www.onismtourhimachal.com/" />
 
     <!-- Favicon and Touch Icons -->
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
@@ -105,23 +105,60 @@
       media="(min-width: 1025px)"
     />
 
-    <!-- Google Analytics + Google Ads -->
+    <!-- Google Tag Manager -->
+    <script>
+      (function (w, d, s, l, i) {
+        w[l] = w[l] || [];
+        w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' });
+        var f = d.getElementsByTagName(s)[0],
+          j = d.createElement(s),
+          dl = l != 'dataLayer' ? '&l=' + l : '';
+        j.async = true;
+        j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
+        f.parentNode.insertBefore(j, f);
+      })(window, document, 'script', 'dataLayer', 'GTM-T8JQ8MNW');
+    </script>
+    <!-- End Google Tag Manager -->
+
+    <!-- Google Analytics 4 -->
     <script
       async
-      src="https://www.googletagmanager.com/gtag/js?id=G-P47C40VEYC"
+      src="https://www.googletagmanager.com/gtag/js?id=G-F63P384BWQ"
     ></script>
+
+    <!-- Google Ads Conversion Tracking -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=AW-11046863854"
+    ></script>
+
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag() {
         dataLayer.push(arguments);
       }
       gtag('js', new Date());
-      gtag('config', 'G-P47C40VEYC', {
+
+      // Configure GA4
+      gtag('config', 'G-F63P384BWQ', {
         page_title: 'ONISM Tour - Best Travel Agency in India',
         page_location: window.location.href,
         send_page_view: true,
+        // Enhanced measurement settings
+        enhanced_measurement: {
+          scroll_percentage: true,
+          page_changes: true,
+          outbound_clicks: true,
+          site_search: true,
+          video_engagement: true,
+          file_downloads: true,
+        },
       });
 
+      // Configure Google Ads
+      gtag('config', 'AW-11046863854');
+
+      // Conversion tracking function for Google Ads
       function gtag_report_conversion(send_to) {
         gtag('event', 'conversion', {
           send_to: send_to,
@@ -129,6 +166,9 @@
           currency: 'INR',
         });
       }
+
+      // Make gtag_report_conversion available globally
+      window.gtag_report_conversion = gtag_report_conversion;
     </script>
 
     <!-- Schema.org markup for Google -->
@@ -139,11 +179,11 @@
         "name": "ONISM Tour",
         "alternateName": "ONISM Tour Himachal",
         "image": [
-          "https://www.onismtourhimachal.in/assets/logo.png",
-          "https://www.onismtourhimachal.in/assets/social-preview.jpg"
+          "https://www.onismtourhimachal.com/assets/logo.png",
+          "https://www.onismtourhimachal.com/assets/social-preview.jpg"
         ],
-        "@id": "https://www.onismtourhimachal.in/",
-        "url": "https://www.onismtourhimachal.in/",
+        "@id": "https://www.onismtourhimachal.com/",
+        "url": "https://www.onismtourhimachal.com/",
         "telephone": ["+91-8580787596", "+91-9459618859"],
         "email": "info@onismtourhimachal.in",
         "address": {
@@ -221,7 +261,7 @@
         "@context": "https://schema.org",
         "@type": "LocalBusiness",
         "name": "ONISM Tour",
-        "image": "https://www.onismtourhimachal.in/assets/logo.png",
+        "image": "https://www.onismtourhimachal.com/assets/logo.png",
         "telephone": "+91-8580787596",
         "email": "info@onismtourhimachal.in",
         "address": {
@@ -230,7 +270,7 @@
           "addressRegion": "Himachal Pradesh",
           "addressCountry": "IN"
         },
-        "url": "https://www.onismtourhimachal.in/",
+        "url": "https://www.onismtourhimachal.com/",
         "openingHours": "Mo-Sa 09:00-18:00"
       }
     </script>
@@ -240,6 +280,17 @@
   </head>
 
   <body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript
+      ><iframe
+        src="https://www.googletagmanager.com/ns.html?id=GTM-T8JQ8MNW"
+        height="0"
+        width="0"
+        style="display: none; visibility: hidden"
+      ></iframe
+    ></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
   </body>

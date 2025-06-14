@@ -13,6 +13,13 @@ import { Autoplay } from 'swiper/modules';
 import 'swiper/css';
 import { useModal } from '../../context/ModalContext';
 
+// Import analytics functions
+import {
+  trackPhoneClick,
+  trackPackageClick,
+  trackCustomEvent,
+} from '../../utils/analytics';
+
 import tour1 from '../../assets/cardSection2/card1.avif';
 import tour2 from '../../assets/cardSection2/card2.avif';
 import tour3 from '../../assets/cardSection2/card3.avif';
@@ -43,6 +50,7 @@ const packages = [
       '09 Nights Accommodation',
       'GST, Toll, Parking and Driver Allowances',
     ],
+    packageName: 'Himachal_Pradesh_with_Amritsar_Tour', // For analytics
   },
   {
     id: 2,
@@ -68,6 +76,7 @@ const packages = [
       '08 Nights Accommodation',
       'GST, Toll, Parking and Driver Allowances',
     ],
+    packageName: 'Incredible_Himachal_Tour', // For analytics
   },
   {
     id: 3,
@@ -91,24 +100,92 @@ const packages = [
       '05 Nights Accommodation',
       'GST, Toll, Parking and Driver Allowances',
     ],
+    packageName: 'Himalayan_Journey_with_Taj_Tour', // For analytics
   },
 ];
 
 const PackageCard = ({ pkg }) => {
   const { openModal } = useModal();
 
+  // Handle Get Quote button click with analytics
   const handleGetQuote = (e) => {
     e.preventDefault();
+
+    // Track the quote request
+    trackPackageClick(pkg.packageName, 'get_quote', {
+      package_price: pkg.price,
+      package_duration: pkg.nights,
+      package_discount: pkg.discount,
+      click_location: 'family_package_card',
+      package_category: 'family_friendly',
+    });
+
     openModal();
   };
+
+  // Handle WhatsApp click with analytics
+  const handleWhatsAppClick = () => {
+    trackCustomEvent('whatsapp_click', {
+      event_category: 'contact',
+      event_label: `${pkg.packageName}_whatsapp`,
+      package_name: pkg.packageName,
+      contact_method: 'whatsapp',
+      click_location: 'family_package_card',
+      package_category: 'family_friendly',
+      value: 1,
+    });
+  };
+
+  // Handle Phone call click with analytics
+  const handlePhoneClick = () => {
+    trackPhoneClick('+919459618859', 'family_package_card');
+
+    // Additional tracking for family package-specific phone calls
+    trackCustomEvent('family_package_phone_call', {
+      event_category: 'contact',
+      event_label: `${pkg.packageName}_phone`,
+      package_name: pkg.packageName,
+      phone_number: '+919459618859',
+      click_location: 'family_package_card',
+      package_category: 'family_friendly',
+      value: 1,
+    });
+  };
+
+  // Handle package card view (when card comes into view)
+  const handlePackageView = () => {
+    trackPackageClick(pkg.packageName, 'card_view', {
+      package_price: pkg.price,
+      package_duration: pkg.nights,
+      package_discount: pkg.discount,
+      view_location: 'family_packages_listing',
+      package_category: 'family_friendly',
+    });
+  };
+
+  // Handle package image click
+  const handleImageClick = () => {
+    trackPackageClick(pkg.packageName, 'image_click', {
+      package_price: pkg.price,
+      click_location: 'family_package_card_image',
+      package_category: 'family_friendly',
+    });
+  };
+
+  // Track when component mounts (package is viewed)
+  React.useEffect(() => {
+    handlePackageView();
+  }, []);
+
   return (
     <div className="bg-[#f8f8f8] shadow-md rounded-xl overflow-hidden transition-transform hover:scale-105 hover:shadow-lg max-w-sm mx-auto flex flex-col h-full">
       <div className="relative">
         <img
           src={pkg.image}
           alt={pkg.title}
-          className="w-full h-56 object-cover"
+          className="w-full h-56 object-cover cursor-pointer"
           loading="lazy"
+          onClick={handleImageClick}
         />
         <span className="absolute top-3 left-3 bg-green-600 text-white text-xs font-semibold px-3 py-1 rounded-full shadow-md">
           {pkg.discount}
@@ -160,13 +237,14 @@ const PackageCard = ({ pkg }) => {
               href="https://wa.link/5bi0km"
               target="_blank"
               rel="noopener noreferrer"
+              onClick={handleWhatsAppClick}
             >
               <div className="p-2 rounded-full bg-white border border-green-600 text-green-600 hover:bg-green-600 hover:text-white transition duration-300">
                 <FaWhatsapp size={20} />
               </div>
             </a>
 
-            <a href="tel:+919459618859">
+            <a href="tel:+919459618859" onClick={handlePhoneClick}>
               <div className="p-2 rounded-full bg-white border border-green-600 text-green-600 hover:bg-green-600 hover:text-white transition duration-300">
                 <MdOutlineWifiCalling3 size={20} />
               </div>
@@ -186,7 +264,19 @@ const PackageCard = ({ pkg }) => {
   );
 };
 
-const cardSection2 = () => {
+const CardSection2 = () => {
+  // Track when the family packages section is viewed
+  React.useEffect(() => {
+    trackCustomEvent('family_packages_section_view', {
+      event_category: 'engagement',
+      event_label: 'family_friendly_packages',
+      section_name: 'Family Friendly Gateway to Happiness',
+      packages_count: packages.length,
+      package_category: 'family_friendly',
+      value: 1,
+    });
+  }, []);
+
   return (
     <>
       <h1 className="text-center text-xl sm:text-2xl md:text-5xl font-bold text-black mt-10 max-w-4xl mx-auto leading-snug px-2">
@@ -202,6 +292,18 @@ const cardSection2 = () => {
             slidesPerView={1}
             loop={true}
             autoplay={{ delay: 3000 }}
+            onSlideChange={(swiper) => {
+              // Track slide changes in mobile carousel
+              const currentPackage = packages[swiper.realIndex];
+              trackCustomEvent('family_mobile_carousel_slide', {
+                event_category: 'engagement',
+                event_label: currentPackage.packageName,
+                slide_index: swiper.realIndex,
+                package_name: currentPackage.packageName,
+                package_category: 'family_friendly',
+                value: 1,
+              });
+            }}
           >
             {packages.map((pkg) => (
               <SwiperSlide key={pkg.id}>
@@ -222,4 +324,4 @@ const cardSection2 = () => {
   );
 };
 
-export default cardSection2;
+export default CardSection2;

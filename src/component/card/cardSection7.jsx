@@ -12,6 +12,14 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay } from 'swiper/modules';
 import 'swiper/css';
 import { useModal } from '../../context/ModalContext';
+
+// Import analytics functions
+import {
+  trackPhoneClick,
+  trackPackageClick,
+  trackCustomEvent,
+} from '../../utils/analytics';
+
 import card1 from '../../assets/cardSection7/card1.avif';
 import card2 from '../../assets/cardSection7/card2.avif';
 import card3 from '../../assets/cardSection7/card3.avif';
@@ -31,6 +39,7 @@ const packages = [
       '05 Nights Accommodation',
       'GST, Toll, Parking and Driver Allowances',
     ],
+    packageName: 'Kashmir_Honeymoon_Packages',
   },
   {
     id: 2,
@@ -46,6 +55,7 @@ const packages = [
       '5 Nights Accommodation',
       'GST, Toll, Parking and Driver Allowances',
     ],
+    packageName: 'Glimpses_of_Kashmir',
   },
   {
     id: 3,
@@ -61,32 +71,101 @@ const packages = [
       '06 Nights Accommodation',
       'GST, Toll, Parking and Driver Allowances',
     ],
+    packageName: 'Paradise_Kashmir',
   },
 ];
 
 const PackageCard = ({ pkg }) => {
   const { openModal } = useModal();
 
-  function handleGetQuote(e) {
+  // Handle Get Quote button click with analytics
+  const handleGetQuote = (e) => {
     e.preventDefault();
+
+    // Track the quote request
+    trackPackageClick(pkg.packageName, 'get_quote', {
+      package_price: pkg.price,
+      package_duration: pkg.nights,
+      package_discount: pkg.discount,
+      click_location: 'kashmir_package_card',
+      package_category: 'kashmir_tours',
+      destination_type: 'scenic_valley',
+      trip_type: 'honeymoon_family',
+    });
+
     openModal();
-    // Track conversion for Get Quote button
-    if (window.gtag_report_conversion) {
-      window.gtag_report_conversion('AW-11046863854/hV0qCNud6YoaEO6Hx5Mp');
-    }
-  }
 
-  function handleWhatsAppClick() {
-    if (window.gtag_report_conversion) {
+    // Track Google Ads conversion
+    if (typeof window.gtag_report_conversion === 'function') {
       window.gtag_report_conversion('AW-11046863854/hV0qCNud6YoaEO6Hx5Mp');
     }
-  }
+  };
 
-  function handleCallClick() {
-    if (window.gtag_report_conversion) {
+  // Handle WhatsApp click with analytics
+  const handleWhatsAppClick = () => {
+    trackCustomEvent('whatsapp_click', {
+      event_category: 'contact',
+      event_label: `${pkg.packageName}_whatsapp`,
+      package_name: pkg.packageName,
+      contact_method: 'whatsapp',
+      click_location: 'kashmir_package_card',
+      package_category: 'kashmir_tours',
+      destination_type: 'scenic_valley',
+      trip_type: 'honeymoon_family',
+      value: 1,
+    });
+
+    // Track Google Ads conversion
+    if (typeof window.gtag_report_conversion === 'function') {
       window.gtag_report_conversion('AW-11046863854/hV0qCNud6YoaEO6Hx5Mp');
     }
-  }
+  };
+
+  // Handle Phone call click with analytics
+  const handleCallClick = () => {
+    trackPhoneClick('+919459618859', 'kashmir_package_card');
+
+    trackCustomEvent('kashmir_package_phone_call', {
+      event_category: 'contact',
+      event_label: `${pkg.packageName}_phone`,
+      package_name: pkg.packageName,
+      phone_number: '+919459618859',
+      click_location: 'kashmir_package_card',
+      package_category: 'kashmir_tours',
+      destination_type: 'scenic_valley',
+      trip_type: 'honeymoon_family',
+      value: 1,
+    });
+
+    // Track Google Ads conversion
+    if (typeof window.gtag_report_conversion === 'function') {
+      window.gtag_report_conversion('AW-11046863854/hV0qCNud6YoaEO6Hx5Mp');
+    }
+  };
+
+  // Handle package image click
+  const handleImageClick = () => {
+    trackPackageClick(pkg.packageName, 'image_click', {
+      package_price: pkg.price,
+      click_location: 'kashmir_package_card_image',
+      package_category: 'kashmir_tours',
+      destination_type: 'scenic_valley',
+      trip_type: 'honeymoon_family',
+    });
+  };
+
+  // Track when component mounts (package is viewed)
+  React.useEffect(() => {
+    trackPackageClick(pkg.packageName, 'card_view', {
+      package_price: pkg.price,
+      package_duration: pkg.nights,
+      package_discount: pkg.discount,
+      view_location: 'kashmir_packages_listing',
+      package_category: 'kashmir_tours',
+      destination_type: 'scenic_valley',
+      trip_type: 'honeymoon_family',
+    });
+  }, []);
 
   return (
     <div className="bg-[#f8f8f8] shadow-md rounded-xl overflow-hidden transition-transform hover:scale-105 hover:shadow-lg max-w-sm w-full mx-auto h-full flex flex-col">
@@ -94,8 +173,9 @@ const PackageCard = ({ pkg }) => {
         <img
           src={pkg.image}
           alt={pkg.title}
-          className="w-full h-full object-cover"
+          className="w-full h-full object-cover cursor-pointer"
           loading="lazy"
+          onClick={handleImageClick}
         />
         <span className="absolute top-3 left-3 bg-green-600 text-white text-xs font-semibold px-3 py-1 rounded-full shadow-md">
           {pkg.discount}
@@ -177,6 +257,19 @@ const PackageCard = ({ pkg }) => {
 };
 
 const CardSection7 = () => {
+  // Track when the Kashmir packages section is viewed
+  React.useEffect(() => {
+    trackCustomEvent('kashmir_packages_section_view', {
+      event_category: 'engagement',
+      event_label: 'best_selling_kashmir_packages',
+      section_name: 'Best Selling Kashmir Tour Packages',
+      packages_count: packages.length,
+      package_category: 'kashmir_tours',
+      destination_type: 'scenic_valley',
+      value: 1,
+    });
+  }, []);
+
   return (
     <>
       <h1 className="text-center text-xl sm:text-2xl md:text-5xl font-bold text-black mt-10 max-w-4xl mx-auto leading-snug px-2">
@@ -192,6 +285,18 @@ const CardSection7 = () => {
             slidesPerView={1}
             loop={true}
             autoplay={{ delay: 3000 }}
+            onSlideChange={(swiper) => {
+              const currentPackage = packages[swiper.realIndex];
+              trackCustomEvent('kashmir_mobile_carousel_slide', {
+                event_category: 'engagement',
+                event_label: currentPackage.packageName,
+                slide_index: swiper.realIndex,
+                package_name: currentPackage.packageName,
+                package_category: 'kashmir_tours',
+                destination_type: 'scenic_valley',
+                value: 1,
+              });
+            }}
           >
             {packages.map((pkg) => (
               <SwiperSlide key={pkg.id}>
