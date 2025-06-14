@@ -3,12 +3,12 @@ import { Autoplay } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/autoplay';
 
-import p1 from '../assets/popularActivity/p1.png';
-import p2 from '../assets/popularActivity/p2.png';
-import p3 from '../assets/popularActivity/p3.png';
-import p4 from '../assets/popularActivity/p4.png';
-import p5 from '../assets/popularActivity/p5.png';
-import p6 from '../assets/popularActivity/p6.png';
+import p1 from '../assets/popularActivity/p1.avif';
+import p2 from '../assets/popularActivity/p2.avif';
+import p3 from '../assets/popularActivity/p3.avif';
+import p4 from '../assets/popularActivity/p4.avif';
+import p5 from '../assets/popularActivity/p5.avif';
+import p6 from '../assets/popularActivity/p6.avif';
 
 const PopularActivities = () => {
   const activities = [
@@ -27,8 +27,8 @@ const PopularActivities = () => {
         Popular Activities
       </div> */}
       <span className="bg-green-100/50 text-green-600 px-5 py-2 rounded-md text-base md:text-lg font-medium inline-block mb-4">
-      Popular Activities
-        </span>
+        Popular Activities
+      </span>
 
       {/* Main Title */}
       <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-800 mb-10">

@@ -2,54 +2,75 @@ import { useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay } from 'swiper/modules';
 import 'swiper/css';
-import {
-  FiPlus,
-  FiX,
-  FiChevronLeft,
-  FiChevronRight
-} from 'react-icons/fi';
+import { FiPlus, FiX, FiChevronLeft, FiChevronRight } from 'react-icons/fi';
 
-import c1 from '../../assets/carousel1/c1.png';
-import c2 from '../../assets/carousel1/c2.png';
-import c3 from '../../assets/carousel1/c3.png';
-import c4 from '../../assets/carousel1/c4.png';
-import c5 from '../../assets/carousel1/c5.png';
-import c6 from '../../assets/carousel1/c6.png';
-import c7 from '../../assets/carousel1/c7.png';
-import c8 from '../../assets/carousel1/c8.png';
-import c9 from '../../assets/carousel1/c9.png';
-import c10 from '../../assets/carousel1/c10.png';
-import c11 from '../../assets/carousel1/c11.png';
-import c12 from '../../assets/carousel1/c12.png';
-import c13 from '../../assets/carousel1/c13.png';
-import c14 from '../../assets/carousel1/c14.png';
-import c15 from '../../assets/carousel1/c15.png';
-import c16 from '../../assets/carousel1/c16.png';
-import c17 from '../../assets/carousel1/c17.png';
-import c18 from '../../assets/carousel1/c18.png';
-import c19 from '../../assets/carousel1/c19.png';
-import c20 from '../../assets/carousel1/c20.png';
-import c21 from '../../assets/carousel1/c21.png';
-import c22 from '../../assets/carousel1/c22.png';
-import c23 from '../../assets/carousel1/c23.png';
-import c24 from '../../assets/carousel1/c24.png';
+import c1 from '../../assets/carousel1/c1.avif';
+import c2 from '../../assets/carousel1/c2.avif';
+import c3 from '../../assets/carousel1/c3.avif';
+import c4 from '../../assets/carousel1/c4.avif';
+import c5 from '../../assets/carousel1/c5.avif';
+import c6 from '../../assets/carousel1/c6.avif';
+import c7 from '../../assets/carousel1/c7.avif';
+import c8 from '../../assets/carousel1/c8.avif';
+import c9 from '../../assets/carousel1/c9.avif';
+import c10 from '../../assets/carousel1/c10.avif';
+import c11 from '../../assets/carousel1/c11.avif';
+import c12 from '../../assets/carousel1/c12.avif';
+import c13 from '../../assets/carousel1/c13.avif';
+import c14 from '../../assets/carousel1/c14.avif';
+import c15 from '../../assets/carousel1/c15.avif';
+import c16 from '../../assets/carousel1/c16.avif';
+import c17 from '../../assets/carousel1/c17.avif';
+import c18 from '../../assets/carousel1/c18.avif';
+import c19 from '../../assets/carousel1/c19.avif';
+import c20 from '../../assets/carousel1/c20.avif';
+import c21 from '../../assets/carousel1/c21.avif';
+import c22 from '../../assets/carousel1/c22.avif';
+import c23 from '../../assets/carousel1/c23.avif';
+import c24 from '../../assets/carousel1/c24.avif';
 
 const images = [
-  c1, c2, c3, c4, c5, c6, c7, c8, c9, c10, c11, c12,
-  c13, c14, c15, c16, c17, c18, c19, c20, c21, c22, c23, c24,
+  c1,
+  c2,
+  c3,
+  c4,
+  c5,
+  c6,
+  c7,
+  c8,
+  c9,
+  c10,
+  c11,
+  c12,
+  c13,
+  c14,
+  c15,
+  c16,
+  c17,
+  c18,
+  c19,
+  c20,
+  c21,
+  c22,
+  c23,
+  c24,
 ];
 
 export default function ImageSlider() {
   const [selectedIndex, setSelectedIndex] = useState(null);
 
   const closeModal = () => setSelectedIndex(null);
-  const prevImage = () => setSelectedIndex((prev) => (prev > 0 ? prev - 1 : images.length - 1));
-  const nextImage = () => setSelectedIndex((prev) => (prev < images.length - 1 ? prev + 1 : 0));
+  const prevImage = () =>
+    setSelectedIndex((prev) => (prev > 0 ? prev - 1 : images.length - 1));
+  const nextImage = () =>
+    setSelectedIndex((prev) => (prev < images.length - 1 ? prev + 1 : 0));
 
   return (
     <div
       className="relative py-10 p-2"
-      style={{ background: "linear-gradient(to bottom, white 50%, #0f1d16 50%)" }}
+      style={{
+        background: 'linear-gradient(to bottom, white 50%, #0f1d16 50%)',
+      }}
     >
       <Swiper
         modules={[Autoplay]}
@@ -58,16 +79,15 @@ export default function ImageSlider() {
         spaceBetween={15}
         slidesPerView={1}
         breakpoints={{
-          0: { slidesPerView: 1 },       // Mobile
-          640: { slidesPerView: 2 },     // Small screens
-          768: { slidesPerView: 3 },     // Tablets
-          1024: { slidesPerView: 5 },    // Desktops
+          0: { slidesPerView: 1 }, // Mobile
+          640: { slidesPerView: 2 }, // Small screens
+          768: { slidesPerView: 3 }, // Tablets
+          1024: { slidesPerView: 5 }, // Desktops
         }}
       >
         {images.map((img, i) => (
           <SwiperSlide key={i}>
-        <div className="relative group cursor-pointer rounded-lg sm:rounded-xl overflow-hidden aspect-square max-w-[300px] mx-auto sm:max-w-full">
-
+            <div className="relative group cursor-pointer rounded-lg sm:rounded-xl overflow-hidden aspect-square max-w-[300px] mx-auto sm:max-w-full">
               <img
                 src={img}
                 alt={`Slide ${i + 1}`}

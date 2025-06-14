@@ -13,9 +13,9 @@ import { Autoplay } from 'swiper/modules';
 import 'swiper/css';
 
 import { useModal } from '../../context/ModalContext';
-import card1 from '../../assets/cardSection3/card1.png';
-import card2 from '../../assets/cardSection3/card2.png';
-import card3 from '../../assets/cardSection3/card3.png';
+import card1 from '../../assets/cardSection3/card1.avif';
+import card2 from '../../assets/cardSection3/card2.avif';
+import card3 from '../../assets/cardSection3/card3.avif';
 
 const packages = [
   {

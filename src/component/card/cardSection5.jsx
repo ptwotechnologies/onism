@@ -12,9 +12,9 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay } from 'swiper/modules';
 import { useModal } from '../../context/ModalContext';
 import 'swiper/css';
-import card1 from '../../assets/cardSection5/card1.png';
-import card2 from '../../assets/cardSection5/card2.png';
-import card3 from '../../assets/cardSection5/card3.png';
+import card1 from '../../assets/cardSection5/card1.avif';
+import card2 from '../../assets/cardSection5/card2.avif';
+import card3 from '../../assets/cardSection5/card3.avif';
 
 const packages = [
   {

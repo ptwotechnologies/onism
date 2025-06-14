@@ -4,10 +4,10 @@ import { Autoplay } from 'swiper/modules';
 import 'swiper/css';
 
 import bgImage from '../../assets/Testimonial/bg-map.png';
-import Review1 from '../../assets/Testimonial2/Testimonial1.png';
-import Review2 from '../../assets/Testimonial2/Testimonial2.png';
-import Review3 from '../../assets/Testimonial2/Testimonial3.png';
-import Review4 from '../../assets/Testimonial2/Testimonial4.png';
+import Review1 from '../../assets/Testimonial2/Testimonial1.avif';
+import Review2 from '../../assets/Testimonial2/Testimonial2.avif';
+import Review3 from '../../assets/Testimonial2/Testimonial3.avif';
+import Review4 from '../../assets/Testimonial2/Testimonial4.avif';
 
 const testimonials = [
   {
