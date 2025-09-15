@@ -20,102 +20,86 @@ import {
   trackCustomEvent,
 } from '../../utils/analytics';
 
-import card1 from '../../assets/cardSection5/card1.avif';
-import card2 from '../../assets/cardSection5/card2.avif';
-import card3 from '../../assets/cardSection5/card3.avif';
+import card1 from '../../assets/cardSection9/package 1.avif';
+import card2 from '../../assets/cardSection9/package 2.avif';
+import card3 from '../../assets/cardSection9/package 3.avif';
 
 const packages = [
   {
     id: 1,
     image: card1,
-    discount: '9% OFF',
-    title: 'Spiti Full Circuit — Shimla To Manali To Road Trip From Delhi',
-    nights: '7 Nights 8 Days',
-    price: '₹17,999/- Per Person (Offer Price)',
+    title: 'Leh Ladakh Expedition',
+    nights: '05 Nights 06 Days',
+    price: '₹10,999/- Per Person (Offer Price)',
     places: [
-      'Shimla',
-      'Narkanda',
-      'Kalpa',
-      'Chitkul',
-      'Sangla',
-      'Nako',
-      'Tabo',
-      'Kaza',
-      'Hikkim',
-      'Komic',
-      'Langza',
-      'Dhankar',
-      'Chicham Bridge',
-      'Chandratal',
-      'Kunzum La',
-      'Manali',
+      'Leh',
+      'Khardungla',
+      'Pangong',
+      'Nubra',
+      'Sham',
+      'Valley',
+      'Turtuk'
     ],
     inclusions: [
-      '07 Breakfast & 07 Dinner',
-      'All sightseeing by cab',
-      '07 Nights Accommodation',
-      'GST, Toll, Parking and Driver Allowances',
-      'Permits',
+      '05 Nights Accommodation',
+      '05 Breakfast & 05 Dinner',
+      'All transfers and sightseeing by cab',
+      'Inner Line Permits',
+      'GST, Toll, Parking and Driver Allowances'
     ],
-    packageName: 'Spiti_Full_Circuit_Shimla_Manali', // For analytics
+    packageName: 'Leh Ladakh Expedition', // For analytics
   },
   {
     id: 2,
     image: card2,
-    discount: '5% OFF',
-    title: 'Spiti Valley With Chandratal',
-    nights: '4 Nights 5 Days',
-    price: '₹13,999/- Per Person (Offer Price)',
+    title: 'Leh Ladakh Tour Package from Delhi',
+    nights: '8 Nights 9 Days',
+    price: '₹18,999/- Per Person (Offer Price)',
     places: [
-      'Kaza',
-      'Hikkim',
-      'Komic',
-      'Langza',
-      'Dhankar',
-      'Chicham Bridge',
-      'Chandratal',
-      'Kunzum La',
-      'Manali',
+       'Leh',
+      'Khardungla',
+      'Kullu Manali',
+      'Jispa ',
+      'Sarchu',
+      'Leh',
+      'Nubra',
+      'Pangong',
+      'Delhi',
     ],
     inclusions: [
-      '04 Breakfast & 04 Dinner',
+     '08 Nights Accommodation',
+      '08 Breakfast & 08 Dinner',
       'All sightseeing by cab',
-      '04 Nights Accommodation',
-      'GST, Toll, Parking and Driver Allowances',
-      'Permits',
+      'Volvo Tickets(from Delhi to manali)',
+      'Inner Line Permits',
+      'GST, Toll, Parking and Driver Allowances'
     ],
-    packageName: 'Spiti_Valley_With_Chandratal', // For analytics
+    packageName: 'Leh Ladakh Tour Package from Delhi', // For analytics
   },
   {
     id: 3,
     image: card3,
-    discount: '7% OFF',
-    title: 'Winter Spiti Valley',
-    nights: '6 Nights 7 Days',
-    price: '₹15,999/- Per Person (Offer Price)',
+    title: 'Leh Ladakh Tour Package From Srinagar',
+    nights: '8 Nights 9 Days',
+    price: '₹18,999/- Per Person (Offer Price)',
     places: [
-      'Shimla',
-      'Narkanda',
-      'Kalpa',
-      'Chitkul',
-      'Sangla',
-      'Nako',
-      'Tabo',
-      'Kaza',
-      'Hikkim',
-      'Komic',
-      'Langza',
-      'Dhankar',
-      'Chicham Bridge',
+      'Srinagar',
+      'Kargil Zojila Pass Leh',
+      'Khardungla',
+      'Leh',
+      'Nubra',
+      'Pangong',
+      'Chang La Pass',
+      'Srinagar'
     ],
     inclusions: [
-      '06 Breakfast & 06 Dinner',
+        '08 Nights Accommodation.',
+      '08 Breakfast & 08 Dinner',
       'All sightseeing by cab',
-      '06 Nights Accommodation.',
+      'Inner Line Permits',
       'GST, Toll, Parking and Driver Allowances',
-      'Permits',
     ],
-    packageName: 'Winter_Spiti_Valley', // For analytics
+    packageName: 'Leh Ladakh Tour Package From Srinagar', // For analytics
   },
 ];
 
@@ -222,9 +206,7 @@ const PackageCard = ({ pkg }) => {
           loading="lazy"
           onClick={handleImageClick}
         />
-        <span className="absolute top-3 left-3 bg-green-600 text-white text-xs font-semibold px-3 py-1 rounded-full shadow-md">
-          {pkg.discount}
-        </span>
+        
       </div>
 
       {/* Content section with flex-grow */}
@@ -304,7 +286,7 @@ const PackageCard = ({ pkg }) => {
   );
 };
 
-const CardSection5 = () => {
+const CardSection9 = () => {
   // Track when the Spiti packages section is viewed
   React.useEffect(() => {
     trackCustomEvent('spiti_packages_section_view', {
@@ -321,7 +303,7 @@ const CardSection5 = () => {
   return (
     <>
       <h1 className="text-center text-xl sm:text-2xl md:text-5xl font-bold text-black mt-10 max-w-4xl mx-auto leading-snug px-2">
-        Spiti Trips
+        LADAKH TRIPS
       </h1>
 
       <div className="container mx-auto max-w-7xl py-14 px-4">
@@ -366,4 +348,4 @@ const CardSection5 = () => {
   );
 };
 
-export default CardSection5;
+export default CardSection9;

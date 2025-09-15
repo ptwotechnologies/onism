@@ -18,6 +18,7 @@ import FloatingButtons from '../component/FloatingButtons';
 import ScrollToTop from '../component/ScrollToTop';
 import Footer from '../component/Footer';
 import QuoteFormModal from '../component/Form';
+import CardSection9 from '../component/card/cardSection9';
 
 const LadakhAndSpiti = memo(() => {
   return (
@@ -30,6 +31,7 @@ const LadakhAndSpiti = memo(() => {
 
       {/* Below the fold */}
       <Suspense fallback={<LoadingSpinner />}>
+      <CardSection9/>
         <CardSection5 />
         <CardSection6 />
         <WhyChooseUs />
