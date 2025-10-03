@@ -99,7 +99,7 @@ const packages = [
       'Inner Line Permits',
       'GST, Toll, Parking and Driver Allowances',
     ],
-    packageName: 'Leh Ladakh Tour Package From Srinagar', // For analytics
+    packageName: 'Leh Ladakh Tour Package From Srinagar', 
   },
 ];
 
