@@ -4,6 +4,7 @@ import LoadingSpinner from "../component/LoadingSpinner";
 // Lazy load below-the-fold components
 const CardSection5 = lazy(() => import("../component/card/cardSection5"));
 const CardSection6 = lazy(() => import("../component/card/cardSection6"));
+const CardSection9 = lazy(() => import("../component/card/cardSection9"));
 const WhyChooseUs = lazy(() => import("../component/whyChooseUs"));
 const TestimonialSection = lazy(() =>
   import("../component/Testimonial/Testimonial2")
@@ -11,14 +12,12 @@ const TestimonialSection = lazy(() =>
 const Adventure = lazy(() => import("../component/Adventure"));
 const ImageSlider = lazy(() => import("../component/carousel/carousel1"));
 
-// Import above-the-fold components normally
+// Normal imports
 import HeroSection2 from "../component/HeroSection2";
 import Form from "../component/Form";
 import FloatingButtons from "../component/FloatingButtons";
 import ScrollToTop from "../component/ScrollToTop";
 import Footer from "../component/Footer";
-import QuoteFormModal from "../component/Form";
-import CardSection9 from "../component/card/cardSection9";
 
 const LadakhAndSpiti = memo(() => {
   return (
@@ -40,9 +39,6 @@ const LadakhAndSpiti = memo(() => {
         <ImageSlider />
         <Footer />
       </Suspense>
-
-      {/* Modal */}
-      <QuoteFormModal />
     </div>
   );
 });
